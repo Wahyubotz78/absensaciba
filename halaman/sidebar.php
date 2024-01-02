@@ -118,7 +118,6 @@
 
   <!-- SIDEBAR BUAT GURU START-->
   <?php
-session_start();
 
 // Pastikan ada session jurusan dan sesuai dengan 'Guru'
 if(isset($_SESSION['jurusan']) && $_SESSION['jurusan'] === 'Guru') {
