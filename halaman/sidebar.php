@@ -118,13 +118,11 @@
 
   <!-- SIDEBAR BUAT GURU START-->
   <?php
-
-// Pastikan ada session jurusan dan sesuai dengan 'Guru'
-if(isset($_SESSION['jurusan']) && $_SESSION['jurusan'] === 'Guru') {
-    // Tampilkan sidebar khusus untuk Guru
-    // Tempatkan kode HTML sidebar untuk Guru di sini
-    // Contoh:
-    ?>
+        							$tampilPeg    =mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
+        							$peg    =mysqli_fetch_array($tampilPeg);
+                      $role = $peg['jurusan'];
+                      if ($role === 'Guru') {
+    							?>
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps ps--active-y bg-white" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -242,8 +240,6 @@ if(isset($_SESSION['jurusan']) && $_SESSION['jurusan'] === 'Guru') {
       <a class="btn bg-gradient-primary mt-3 w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard-pro?ref=sidebarfree">Upgrade to pro</a>
     </div>
   </aside>
-  <?php
-}
-?>
+  <?php } ?>
   <!-- SIDEBAR BUAT GURU END -->
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
