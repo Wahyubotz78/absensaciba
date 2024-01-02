@@ -151,6 +151,10 @@
         </div>
         <ul class="navbar-nav  justify-content-end">
                     <!-- Topbar Navbar -->
+                    <?php
+        							$tampilPeg    =mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
+        							$peg    =mysqli_fetch_array($tampilPeg);
+    							?>
                     <ul class="navbar-nav ml-auto">
 
                       <div class="topbar-divider d-none d-sm-block"></div>
@@ -159,14 +163,14 @@
                       <li class="nav-item dropdown no-arrow">
                           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <span style="color:#141E2F;" class="breadcrumb-item text-sm">Udin Pentol</span>　
+                              <span style="color:#141E2F;" class="breadcrumb-item text-sm"><?=$peg['namalengkap']?></span>　
                               <img class="img-profile rounded-circle" style="height: auto; width: 40px;"
                                   src="../assets/img/poto/jessidintin.jpeg">
                           </a>
                           <!-- Dropdown - User Information -->
                           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                               aria-labelledby="userDropdown">
-                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                              <a class="dropdown-item" href="logout" data-toggle="modal" data-target="#logoutModal">
                                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                   Logout
                               </a>
