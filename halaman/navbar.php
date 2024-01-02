@@ -165,7 +165,7 @@
                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <span style="color:#141E2F;" class="breadcrumb-item text-sm"><?=$peg['namalengkap']?></span>　
                               <img class="img-profile rounded-circle" style="height: auto; width: 40px;"
-                                  src="../assets/img/poto/jessidintin.jpeg">
+                                  src="../fotomurid/<?=$peg['fotomurid']?>">
                           </a>
                           <!-- Dropdown - User Information -->
                           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
