@@ -9,7 +9,6 @@ if (isset($_SESSION['nis'])) {
  
 if (isset($_POST['submit'])) {
     $nis = mysqli_real_escape_string($koneksi, $_POST['nis']);
-    $jurusan = mysqli_real_escape_string($koneksi, $_POST['jurusan']);
  
     $sql = "SELECT * FROM datamurid WHERE nis='$nis'";
     $result = mysqli_query($koneksi, $sql);
@@ -17,7 +16,6 @@ if (isset($_POST['submit'])) {
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
         $_SESSION['nis'] = $row['nis'];
-        $_SESSION['jurusan'] = $row['jurusan'];
         header("Location: halaman/beranda");
         exit();
     } else {
