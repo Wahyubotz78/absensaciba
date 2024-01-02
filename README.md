@@ -1,2 +1,1 @@
-Aisayangkunih brooo
-Ohhgtu broo
+absen saciba sementara
