@@ -157,6 +157,7 @@ if ($waktu_sekarangkum >= 5 && $waktu_sekarangkum < 12) {
 } else {
     $ucapanjang = "Semoga mimpi indah menyertai setiap langkah tidurmu. Segera dapatkan kenyamanan dalam pelukan malam yang tenang!";
 }
+$waktu_sekarangkumbang = date("H");
 // preng cuy
 if ($waktu_sekarangkumbang >= 5 && $waktu_sekarangkumbang < 12) {
   $preng = "../preng/belajar.jpg";
@@ -168,6 +169,7 @@ $preng = "../preng/sore.jpg";
   $preng = "../preng/tidur.jpg";
 }
 // preng cuy
+$waktu_sekarangkumbangkang = date("H");
 if ($waktu_sekarangkumbangkang >= 5 && $waktu_sekarangkumbangkang < 12) {
   $ori = "../ori/belajar.png";
 } elseif ($waktu_sekarangkumbangkang >= 12 && $waktu_sekarangkumbangkang < 16) {
