@@ -16,5 +16,13 @@
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-  <?php include '../koneksi.php';
-session_start(); ?>
+
+  <?php
+  include '../koneksi.php';
+
+  // Mengecek apakah nama file bukan sign-up.php
+  if(basename($_SERVER['PHP_SELF']) !== 'login.php') {
+      session_start();
+      // Tempatkan baris-baris lainnya yang ingin dijalankan di sini
+  }
+  ?>
