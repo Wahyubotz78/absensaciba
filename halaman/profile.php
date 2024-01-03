@@ -7,7 +7,10 @@
   </title>
   <?php include('link.php');?>
 </head>
-
+<?php
+        							$tampilPeg    =mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
+        							$peg    =mysqli_fetch_array($tampilPeg);
+    							?>
 <body class="g-sidenav-show bg-gray-100">
 <?php include('sidebar.php');?>
   <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
@@ -20,16 +23,16 @@
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src="../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              <img src="../fotomurid/<?=$peg['fotomurid']?>" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
             </div>
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-                Alec Thompson
+              <?=$peg['namalengkap']?>
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
-                CEO / Co-Founder
+              <?=$peg['jurusan']?>
               </p>
             </div>
           </div>
