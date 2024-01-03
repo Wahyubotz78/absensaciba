@@ -294,34 +294,47 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputName2"><strong>Username (untuk login)</strong></label>
-                    <input type="text" placeholder="Masukkan username"  name="sadminusername" id="sadminusername" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_.]{5,12}$" title="Username must be alphanumeric 6 to 12 chars" onBlur="checkAvailability()"  required>
+                    <label for="inputName2"><strong>NIS Murid</strong></label>
+                    <input type="text" placeholder="NIS murid"  name="nis" class="form-control" value="<?=$peg['nis']?>" readonly>
                     <span id="user-availability-status" style="font-size:14px;"></span>
                   </div>
                   <div class="form-group">
-                    <label for="inputName2"><strong>Username (untuk login)</strong></label>
-                    <input type="text" placeholder="Masukkan username"  name="sadminusername" id="sadminusername" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_.]{5,12}$" title="Username must be alphanumeric 6 to 12 chars" onBlur="checkAvailability()"  required>
-                    <span id="user-availability-status" style="font-size:14px;"></span>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputName2"><strong>Username (untuk login)</strong></label>
-                    <input type="text" placeholder="Masukkan username"  name="sadminusername" id="sadminusername" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_.]{5,12}$" title="Username must be alphanumeric 6 to 12 chars" onBlur="checkAvailability()"  required>
+                    <label for="inputName2"><strong>Jurusan</strong></label>
+                    <input type="text" placeholder="Jurusan murid"  name="jurusan" id="sadminusername" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_.]{5,12}$" title="Username must be alphanumeric 6 to 12 chars" onBlur="checkAvailability()" value="<?=$peg['jurusan']?>" readonly>
                     <span id="user-availability-status" style="font-size:14px;"></span>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail"><strong>Email</strong></label>
-                    <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Masukkan email" required>
+                    <label for="inputEmail"><strong>Nama Lengkap</strong></label>
+                    <input type="text" class="form-control" id="emailid" name="namalengkap" placeholder="Nama lengkap murid" value="<?=$peg['namalengkap']?>" readonly>
                   </div>
+                  <?php
+        							$tampilPeg    =mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
+        							$peg    =mysqli_fetch_array($tampilPeg);
+                      $role = $peg['jurusan'];
+                      if ($role === 'Admin') {
+    							?>
                   <div class="form-group">
-                    <label for="inputEmail"><strong>Email</strong></label>
-                    <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Masukkan email" required>
+                    <label for="inputEmail"><strong>Role</strong></label>
+                    <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Masukkan email" value="Admin Absen" readonly>
                   </div>
+                      <?php } ?>
+                      <?php
+        							$tampilPeg    =mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
+        							$peg    =mysqli_fetch_array($tampilPeg);
+                      $role = $peg['jurusan'];
+                      if ($role === 'Guru') {
+    							?>
                   <div class="form-group">
-                    <label for="inputEmail"><strong>Email</strong></label>
-                    <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Masukkan email" required>
+                    <label for="inputEmail"><strong>Role</strong></label>
+                    <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Masukkan email" value="Guru" readonly>
                   </div>
+                  <?php } else { ?>
+                      <div class="form-group">
+                    <label for="inputEmail"><strong>Role</strong></label>
+                    <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Masukkan email" value="Murid" readonly>
+                  </div><?php } ?>
                 </div>
               </div>
               <button type="submit" class="btn btn-custom waves-effect waves-light btn-md" id="submit" name="submit"><strong></strong>Kirim</button>
