@@ -1,1 +1,1 @@
-absen saciba sementara
+Aisakusayang
