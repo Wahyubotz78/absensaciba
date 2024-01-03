@@ -157,6 +157,26 @@ if ($waktu_sekarangkum >= 5 && $waktu_sekarangkum < 12) {
 } else {
     $ucapanjang = "Semoga mimpi indah menyertai setiap langkah tidurmu. Segera dapatkan kenyamanan dalam pelukan malam yang tenang!";
 }
+// preng cuy
+if ($waktu_sekarangkumbang >= 5 && $waktu_sekarangkumbang < 12) {
+  $preng = "../preng/belajar.jpg";
+} elseif ($waktu_sekarangkumbang >= 12 && $waktu_sekarangkumbang < 16) {
+  $preng = "../preng/makan.jpg";
+} elseif ($waktu_sekarangkumbang >= 16 && $waktu_sekarangkumbang < 19) {
+$preng = "../preng/sore.jpg";
+} else {
+  $preng = "../preng/tidur.jpg";
+}
+// preng cuy
+if ($waktu_sekarangkumbangkang >= 5 && $waktu_sekarangkumbangkang < 12) {
+  $ori = "../ori/belajar.png";
+} elseif ($waktu_sekarangkumbangkang >= 12 && $waktu_sekarangkumbangkang < 16) {
+  $ori = "../ori/makan.png";
+} elseif ($waktu_sekarangkumbangkang >= 16 && $waktu_sekarangkumbangkang < 19) {
+$ori = "../ori/sore.png";
+} else {
+  $ori = "../ori/tidur.png";
+}
     							?>
                   <div class="d-flex flex-column h-100">
                     <p class="mb-1 pt-2 text-bold">Halo, <?=$peg['namalengkap']?></p>
@@ -172,7 +192,7 @@ if ($waktu_sekarangkum >= 5 && $waktu_sekarangkum < 12) {
                   <div class="border-radius-lg h-100">
                     <img src="../assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                     <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                      <img style="border-radius: 10px;" class="w-100 position-relative" src="../fotomurid/<?=$peg['fotomurid']?>" alt="fotomurid">
+                      <img style="border-radius: 10px;" class="w-100 position-relative" src="<?= $ori; ?>" alt="fotomurid">
                     </div>
                   </div>
                 </div>

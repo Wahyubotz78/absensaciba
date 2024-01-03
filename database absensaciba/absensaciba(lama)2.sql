@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 04 Jan 2024 pada 02.56
--- Versi server: 10.4.28-MariaDB
--- Versi PHP: 8.2.4
+-- Generation Time: Jan 03, 2024 at 07:09 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `datamurid`
+-- Table structure for table `datamurid`
 --
 
 CREATE TABLE `datamurid` (
@@ -36,7 +36,7 @@ CREATE TABLE `datamurid` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `datamurid`
+-- Dumping data for table `datamurid`
 --
 
 INSERT INTO `datamurid` (`id`, `nis`, `namalengkap`, `jurusan`, `fotomurid`) VALUES
@@ -49,17 +49,17 @@ INSERT INTO `datamurid` (`id`, `nis`, `namalengkap`, `jurusan`, `fotomurid`) VAL
 --
 
 --
--- Indeks untuk tabel `datamurid`
+-- Indexes for table `datamurid`
 --
 ALTER TABLE `datamurid`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `datamurid`
+-- AUTO_INCREMENT for table `datamurid`
 --
 ALTER TABLE `datamurid`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;

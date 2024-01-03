@@ -1,3 +1,21 @@
+<?php
+   // Code for Add New Sub Admi
+  //  if(isset($_POST['submit'])){
+  //  $username=$_POST['sadminusername'];
+  //  $email=$_POST['emailid'];
+  //  $password=md5($_POST['pwd']);
+  //  $usertype='0';
+  //  $query=mysqli_query($con,"insert into tbladmin(AdminUserName,AdminEmailId,AdminPassword,userType ) values('$username','$email','$password','$usertype')");
+  //  if($query){
+  //  echo "<script>alert('Sub-admin details added successfully.');</script>";
+  //  echo "<script type='text/javascript'> document.location = 'admindata'; </script>";
+  //  } else {
+  //  echo "<script>alert('Something went wrong. Please try again.');</script>";
+  //  }
+  //  }
+   
+   ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -262,12 +280,57 @@
         <div class="col-12 mt-4">
           <div class="card mb-4">
             <div class="card-header pb-0 p-3">
-              <h6 class="mb-1">Projects</h6>
-              <p class="text-sm">Architects design houses</p>
+              <h6 class="mb-1">Data Diri Murid</h6>
+              <p class="text-sm">Berisi data diri murid SMKN 1 Cikarang Barat</p>
             </div>
             <div class="card-body p-3">
               <div class="row">
-                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                <!-- Mulai reservasi -->
+<div id="contact-us" class="page-section">
+        <div class="container">
+          <div id="note"></div>
+          <div id="fields">
+            <form id="ajax-contact-form" class="form-horizontal clearfix" name="addsuadmin" method="post">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inputName2"><strong>Username (untuk login)</strong></label>
+                    <input type="text" placeholder="Masukkan username"  name="sadminusername" id="sadminusername" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_.]{5,12}$" title="Username must be alphanumeric 6 to 12 chars" onBlur="checkAvailability()"  required>
+                    <span id="user-availability-status" style="font-size:14px;"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName2"><strong>Username (untuk login)</strong></label>
+                    <input type="text" placeholder="Masukkan username"  name="sadminusername" id="sadminusername" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_.]{5,12}$" title="Username must be alphanumeric 6 to 12 chars" onBlur="checkAvailability()"  required>
+                    <span id="user-availability-status" style="font-size:14px;"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName2"><strong>Username (untuk login)</strong></label>
+                    <input type="text" placeholder="Masukkan username"  name="sadminusername" id="sadminusername" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_.]{5,12}$" title="Username must be alphanumeric 6 to 12 chars" onBlur="checkAvailability()"  required>
+                    <span id="user-availability-status" style="font-size:14px;"></span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inputEmail"><strong>Email</strong></label>
+                    <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Masukkan email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail"><strong>Email</strong></label>
+                    <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Masukkan email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail"><strong>Email</strong></label>
+                    <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Masukkan email" required>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-custom waves-effect waves-light btn-md" id="submit" name="submit"><strong></strong>Kirim</button>
+            </form>
+          </div>
+        </div>
+      </div>
+            <!-- Akhir Reservasi -->
+                <!-- <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card card-blog card-plain">
                     <div class="position-relative">
                       <a class="d-block shadow-xl border-radius-xl">
@@ -303,8 +366,8 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                </div> -->
+                <!-- <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card card-blog card-plain">
                     <div class="position-relative">
                       <a class="d-block shadow-xl border-radius-xl">
@@ -340,8 +403,8 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                </div> -->
+                <!-- <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card card-blog card-plain">
                     <div class="position-relative">
                       <a class="d-block shadow-xl border-radius-xl">
@@ -377,8 +440,8 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                </div> -->
+                <!-- <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card h-100 card-plain border">
                     <div class="card-body d-flex flex-column justify-content-center text-center">
                       <a href="javascript:;">
@@ -387,7 +450,7 @@
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
