@@ -42,6 +42,7 @@
                     <p class="text-sm mb-0 text-capitalize font-weight-bold"><?php echo $hari_ini; ?></p>
                     <h5 class="font-weight-bolder mb-0">
                     07:30 - 09:30
+                    <br>
                       <span class="text-success text-sm font-weight-bolder">Absen Masuk</span>
                     </h5>
                   </div>
@@ -64,6 +65,7 @@
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Absen masuk</p>
                     <h5 class="font-weight-bolder mb-0">
                       Belum Absen
+                      <br>
                       <span class="text-success text-sm font-weight-bolder">Sudah Hadir</span>
                     </h5>
                   </div>
@@ -86,6 +88,7 @@
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Absen Pulang</p>
                     <h5 class="font-weight-bolder mb-0">
                       Belum Absen
+                      <br>
                       <span class="text-danger text-sm font-weight-bolder">Sudah Pulang</span>
                     </h5>
                   </div>
@@ -126,6 +129,7 @@
                     <p class="text-sm mb-0 text-capitalize font-weight-bold"><?php echo $hari_ini; ?></p>
                     <h5 class="font-weight-bolder mb-0">
                       14:00 - 15:30
+                      <br>
                       <span class="text-danger text-sm font-weight-bolder">Absen Pulang</span>
                     </h5>
                   </div>
