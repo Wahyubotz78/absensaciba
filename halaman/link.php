@@ -19,7 +19,7 @@
 
   <?php
   include '../koneksi.php';
-
+  date_default_timezone_set('Asia/Jakarta');
   // Mengecek apakah nama file bukan sign-up.php
   if(basename($_SERVER['PHP_SELF']) !== 'login.php') {
       session_start();
