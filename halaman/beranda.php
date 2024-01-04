@@ -151,58 +151,59 @@
               <div class="row">
                 <div class="col-lg-6">
                 <?php
-date_default_timezone_set('Asia/Jakarta');
+                
+                date_default_timezone_set('Asia/Jakarta');
 
-$tampilPeg = mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
-$peg = mysqli_fetch_array($tampilPeg);
+                $tampilPeg = mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
+                $peg = mysqli_fetch_array($tampilPeg);
 
-$waktu_sekarang = date("H");
+                $waktu_sekarang = date("H");
 
-// Menyesuaikan ucapan berdasarkan waktu
-if ($waktu_sekarang >= 5 && $waktu_sekarang < 12) {
-    $ucapan = "Selamat pagi, semangat belajarnya! 🤗";
-} elseif ($waktu_sekarang >= 12 && $waktu_sekarang < 16) {
-    $ucapan = "Selamat siang, jangan lupa makan siang! 😋";
-} elseif ($waktu_sekarang >= 16 && $waktu_sekarang < 19) {
-  $ucapan = "Selamat sore, selamat beristirahat! 😴";
-} else {
-    $ucapan = "Selamat malam, selamat beristirahat! 😴";
-}
-// Mendapatkan waktu saat ini
-$waktu_sekarangkum = date("H");
+                // Menyesuaikan ucapan berdasarkan waktu
+                if ($waktu_sekarang >= 5 && $waktu_sekarang < 12) {
+                    $ucapan = "Selamat pagi, semangat belajarnya! 🤗";
+                } elseif ($waktu_sekarang >= 12 && $waktu_sekarang < 16) {
+                    $ucapan = "Selamat siang, jangan lupa makan siang! 😋";
+                } elseif ($waktu_sekarang >= 16 && $waktu_sekarang < 19) {
+                  $ucapan = "Selamat sore, selamat beristirahat! 😴";
+                } else {
+                    $ucapan = "Selamat malam, selamat beristirahat! 😴";
+                }
+                // Mendapatkan waktu saat ini
+                $waktu_sekarangkum = date("H");
 
-// Menyesuaikan ucapan berdasarkan waktu
-if ($waktu_sekarangkum >= 5 && $waktu_sekarangkum < 12) {
-    $ucapanjang = "Setiap langkah kecilmu membawamu lebih dekat pada impianmu. Sukses untuk hari pembelajaranmu!";
-} elseif ($waktu_sekarangkum >= 12 && $waktu_sekarangkum < 16) {
-    $ucapanjang = "Selamat menikmati makan siangnya! Semoga makanannya enak dan memberikan energi untuk melanjutkan aktivitas!";
-} elseif ($waktu_sekarangkum >= 16 && $waktu_sekarangkum < 19) {
-  $ucapanjang = "Semoga momen sore ini memberikanmu ketenangan dan kebahagiaan. Nikmatilah istirahatmu dengan penuh kedamaian!";
-} else {
-    $ucapanjang = "Semoga mimpi indah menyertai setiap langkah tidurmu. Segera dapatkan kenyamanan dalam pelukan malam yang tenang!";
-}
-$waktu_sekarangkumbang = date("H");
-// preng cuy
-if ($waktu_sekarangkumbang >= 5 && $waktu_sekarangkumbang < 12) {
-  $preng = "../preng/belajar.jpg";
-} elseif ($waktu_sekarangkumbang >= 12 && $waktu_sekarangkumbang < 16) {
-  $preng = "../preng/makan.jpg";
-} elseif ($waktu_sekarangkumbang >= 16 && $waktu_sekarangkumbang < 19) {
-$preng = "../preng/sore.jpg";
-} else {
-  $preng = "../preng/tidur.jpg";
-}
-// preng cuy
-$waktu_sekarangkumbangkang = date("H");
-if ($waktu_sekarangkumbangkang >= 5 && $waktu_sekarangkumbangkang < 12) {
-  $ori = "../ori/belajar.png";
-} elseif ($waktu_sekarangkumbangkang >= 12 && $waktu_sekarangkumbangkang < 16) {
-  $ori = "../ori/makan.png";
-} elseif ($waktu_sekarangkumbangkang >= 16 && $waktu_sekarangkumbangkang < 19) {
-$ori = "../ori/sore.png";
-} else {
-  $ori = "../ori/tidur.png";
-}
+                // Menyesuaikan ucapan berdasarkan waktu
+                if ($waktu_sekarangkum >= 5 && $waktu_sekarangkum < 12) {
+                    $ucapanjang = "Setiap langkah kecilmu membawamu lebih dekat pada impianmu. Sukses untuk hari pembelajaranmu!";
+                } elseif ($waktu_sekarangkum >= 12 && $waktu_sekarangkum < 16) {
+                    $ucapanjang = "Selamat menikmati makan siangnya! Semoga makanannya enak dan memberikan energi untuk melanjutkan aktivitas!";
+                } elseif ($waktu_sekarangkum >= 16 && $waktu_sekarangkum < 19) {
+                  $ucapanjang = "Semoga momen sore ini memberikanmu ketenangan dan kebahagiaan. Nikmatilah istirahatmu dengan penuh kedamaian!";
+                } else {
+                    $ucapanjang = "Semoga mimpi indah menyertai setiap langkah tidurmu. Segera dapatkan kenyamanan dalam pelukan malam yang tenang!";
+                }
+                $waktu_sekarangkumbang = date("H");
+                // preng cuy
+                if ($waktu_sekarangkumbang >= 5 && $waktu_sekarangkumbang < 12) {
+                  $preng = "../preng/belajar.jpg";
+                } elseif ($waktu_sekarangkumbang >= 12 && $waktu_sekarangkumbang < 16) {
+                  $preng = "../preng/makan.jpg";
+                } elseif ($waktu_sekarangkumbang >= 16 && $waktu_sekarangkumbang < 19) {
+                $preng = "../preng/sore.jpg";
+                } else {
+                  $preng = "../preng/tidur.jpg";
+                }
+                // preng cuy
+                $waktu_sekarangkumbangkang = date("H");
+                if ($waktu_sekarangkumbangkang >= 5 && $waktu_sekarangkumbangkang < 12) {
+                  $ori = "../ori/belajar.png";
+                } elseif ($waktu_sekarangkumbangkang >= 12 && $waktu_sekarangkumbangkang < 16) {
+                  $ori = "../ori/makan.png";
+                } elseif ($waktu_sekarangkumbangkang >= 16 && $waktu_sekarangkumbangkang < 19) {
+                $ori = "../ori/sore.png";
+                } else {
+                  $ori = "../ori/tidur.png";
+                }
     							?>
                   <div class="d-flex flex-column h-100">
                     <p class="mb-1 pt-2 text-bold">Halo, <?=$peg['namalengkap']?></p>
