@@ -23,22 +23,21 @@
                   <div class="numbers">
 
                   <?php
-// Setel lokal ke bahasa Indonesia
-$locale = 'id_ID';
+                  // Setel lokal ke bahasa Indonesia
+                  $locale = 'id_ID';
 
-// Tentukan zona waktu yang diinginkan (Asia/Jakarta)
-$timezone = new DateTimeZone('Asia/Jakarta');
+                  // Tentukan zona waktu yang diinginkan (Asia/Jakarta)
+                  $timezone = new DateTimeZone('Asia/Jakarta');
 
-// Buat objek DateTime dengan zona waktu yang telah ditentukan
-$date = new DateTime('', $timezone);
+                  // Buat objek DateTime dengan zona waktu yang telah ditentukan
+                  $date = new DateTime('', $timezone);
 
-// Buat objek IntlDateFormatter dengan zona waktu yang telah ditentukan
-$dateFormatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::NONE, $timezone);
+                  // Buat objek IntlDateFormatter dengan zona waktu yang telah ditentukan
+                  $dateFormatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::NONE, $timezone);
 
-// Mendapatkan hari ini
-$hari_ini = $dateFormatter->format($date);
-?>
-
+                  // Mendapatkan hari ini
+                  $hari_ini = $dateFormatter->format($date);
+                  ?>
 
                     <p class="text-sm mb-0 text-capitalize font-weight-bold"><?php echo $hari_ini; ?></p>
                     <h5 class="font-weight-bolder mb-0">
@@ -111,22 +110,21 @@ $hari_ini = $dateFormatter->format($date);
                   <div class="numbers">
 
                   <?php
-// Setel lokal ke bahasa Indonesia
-$locale = 'id_ID';
+                  // Setel lokal ke bahasa Indonesia
+                  $locale = 'id_ID';
 
-// Tentukan zona waktu yang diinginkan (Asia/Jakarta)
-$timezone = new DateTimeZone('Asia/Jakarta');
+                  // Tentukan zona waktu yang diinginkan (Asia/Jakarta)
+                  $timezone = new DateTimeZone('Asia/Jakarta');
 
-// Buat objek DateTime dengan zona waktu yang telah ditentukan
-$date = new DateTime('', $timezone);
+                  // Buat objek DateTime dengan zona waktu yang telah ditentukan
+                  $date = new DateTime('', $timezone);
 
-// Buat objek IntlDateFormatter dengan zona waktu yang telah ditentukan
-$dateFormatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::NONE, $timezone);
+                  // Buat objek IntlDateFormatter dengan zona waktu yang telah ditentukan
+                  $dateFormatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::NONE, $timezone);
 
-// Mendapatkan hari ini
-$hari_ini = $dateFormatter->format($date);
-?>
-
+                  // Mendapatkan hari ini
+                  $hari_ini = $dateFormatter->format($date);
+                  ?>
 
                     <p class="text-sm mb-0 text-capitalize font-weight-bold"><?php echo $hari_ini; ?></p>
                     <h5 class="font-weight-bolder mb-0">
@@ -153,9 +151,11 @@ $hari_ini = $dateFormatter->format($date);
               <div class="row">
                 <div class="col-lg-6">
                 <?php
-        							$tampilPeg    =mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
-        							$peg    =mysqli_fetch_array($tampilPeg);
-                      // Mendapatkan waktu saat ini
+date_default_timezone_set('Asia/Jakarta');
+
+$tampilPeg = mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
+$peg = mysqli_fetch_array($tampilPeg);
+
 $waktu_sekarang = date("H");
 
 // Menyesuaikan ucapan berdasarkan waktu
