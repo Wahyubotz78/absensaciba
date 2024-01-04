@@ -13,7 +13,20 @@
   //  echo "<script>alert('Something went wrong. Please try again.');</script>";
   //  }
   //  }
-   
+  session_start();
+  // Tempatkan baris-baris lainnya yang ingin dijalankan di sini
+  // Aktifkan semua jenis kesalahan
+error_reporting(E_ALL);
+// Tampilkan pesan kesalahan ke layar
+ini_set('display_errors', 1);
+
+// Periksa apakah sesi pengguna ada atau tidak
+if (!isset($_SESSION['nis'])) {
+// Jika tidak ada sesi pengguna, alihkan ke halaman login
+header("Location: login");
+exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
+}
+
    ?>
 
 <!DOCTYPE html>
