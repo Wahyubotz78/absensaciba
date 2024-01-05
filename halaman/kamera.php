@@ -1,55 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>QR Code Scanner</title>
-    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  <title>Scanner QR Code</title>
 </head>
 <body>
-    <center>
-    <div id="app">
-        <video id="preview"></video>
-    </div>
-    </center>
-    <script>
-        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+  <video id="cameraPreview" width="50%" height="auto" playsinline autoplay></video>
 
-        scanner.addListener('scan', function(content) {
-            // Lakukan proses penyimpanan ke database menggunakan Ajax di sini
-            saveQRCodeToDatabase(content);
-        });
+  <script src="https://cdn.jsdelivr.net/npm/quagga"></script>
+  <script>
+    function startScanner() {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+          var video = document.getElementById('cameraPreview');
+          video.srcObject = stream;
+          video.play();
 
-        // Mulai pemindaian QR code
-        Instascan.Camera.getCameras().then(cameras => {
-            if (cameras.length > 0) {
-                scanner.start(cameras[0]);
-            } else {
-                console.error('Tidak ada kamera yang ditemukan.');
+          Quagga.init({
+            inputStream: {
+              video: {
+                target: video,
+              },
+            },
+            decoder: {
+              readers: ['code_128_reader'] // Sesuaikan pembaca QR code
             }
-        }).catch(e => {
-            console.error(e);
+          });
+
+          Quagga.onDetected(function(result) {
+            var code = result.codeResult.code; // Nilai NIS dari QR code
+            sendDataToServer(code);
+          });
+
+          Quagga.start();
+        })
+        .catch(function(err) {
+          console.error('Tidak dapat mengakses kamera:', err);
         });
+    }
 
-        // Fungsi untuk menyimpan hasil QR code ke database menggunakan Ajax
-        function saveQRCodeToDatabase(qrContent) {
-            let xhr = new XMLHttpRequest();
-            let url = 'proseskamera.php';
-            let params = 'hasil_qr=' + qrContent;
+    function sendDataToServer(code) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "proseskamera.php", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
 
-            xhr.open('POST', url, true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        console.log('Hasil QR Code berhasil disimpan ke database.');
-                    } else {
-                        console.error('Gagal menyimpan ke database.');
-                    }
-                }
-            };
-
-            xhr.send(params);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            console.log('Data absen berhasil disimpan.');
+            // Lakukan tindakan lain setelah data berhasil disimpan
+          } else {
+            console.error('Gagal menyimpan data absen.');
+            // Handle kesalahan jika penyimpanan data gagal
+          }
         }
-    </script>
+      };
+
+      var data = JSON.stringify({ nis: code });
+      xhr.send(data);
+    }
+
+    // Mulai scanner ketika halaman dimuat
+    startScanner();
+  </script>
 </body>
 </html>

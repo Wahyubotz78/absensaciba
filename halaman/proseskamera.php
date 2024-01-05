@@ -1,27 +1,30 @@
 <?php
-// Lakukan koneksi ke database
-include '../koneksi.php';;
+// Koneksi ke database (sesuaikan dengan informasi database Anda)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "absensaciba";
 
-// Periksa koneksi
-if ($koneksi->connect_error) {
-    die("Koneksi ke database gagal: " . $koneksi->connect_error);
+// Buat koneksi
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Tangkap hasil QR code dari permintaan POST
-$hasil_qr = $_POST['hasil_qr'];
+// Ambil data NIS dari request
+$data = json_decode(file_get_contents('php://input'), true);
+$nis = $data['nis'];
 
-// Lakukan sanitasi data sebelum dimasukkan ke dalam database
-$hasil_qr = $koneksi->real_escape_string($hasil_qr);
+// Simpan NIS ke dalam tabel database absen
+$sql = "INSERT INTO absen (nis) VALUES ('$nis')";
 
-// Lakukan query untuk memasukkan hasil QR code ke dalam database
-$query = "INSERT INTO absen (hasil_qr) VALUES ('$hasil_qr')";
-
-if ($koneksi->query($query) === TRUE) {
-    http_response_code(200); // Berhasil
+if ($conn->query($sql) === TRUE) {
+    echo "Data berhasil disimpan";
 } else {
-    http_response_code(500); // Gagal
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-// Tutup koneksi ke database
-$koneksi->close();
+$conn->close();
 ?>
