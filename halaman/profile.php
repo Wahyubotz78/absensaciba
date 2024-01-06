@@ -13,7 +13,20 @@
   //  echo "<script>alert('Something went wrong. Please try again.');</script>";
   //  }
   //  }
-   
+  session_start();
+  // Tempatkan baris-baris lainnya yang ingin dijalankan di sini
+  // Aktifkan semua jenis kesalahan
+error_reporting(E_ALL);
+// Tampilkan pesan kesalahan ke layar
+ini_set('display_errors', 1);
+
+// Periksa apakah sesi pengguna ada atau tidak
+if (!isset($_SESSION['nis'])) {
+// Jika tidak ada sesi pengguna, alihkan ke halaman login
+header("Location: login");
+exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
+}
+
    ?>
 
 <!DOCTYPE html>
@@ -190,7 +203,7 @@
                 </div>
               </div>
             </div>
-            <div class="card-body p-3">
+            <!-- <div class="card-body p-3">
               <p class="text-sm">
                 Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).
               </p>
@@ -213,7 +226,38 @@
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> -->
+            <style>
+    /* CSS untuk menyembunyikan <br> pada mode mobile */
+    @media screen and (max-width: 768px) {
+        .mobile-br {
+            display: none;
+        }
+    }
+</style>
+            <br class="mobile-br">
+            <br class="mobile-br">
+            <div class="card-header mx-4 p-3 text-center">
+                      <div class="icon icon-shape icon-xl shadow text-center border-radius-xl">
+                        <img id="qrCode" style="border-radius: 10px;" class="w-100 position-relative">
+                      </div>
+                    </div>
+                    <div class="card-body pt-0 p-3 text-center">
+                      <h6 class="text-center mb-0"><?=$peg['nis']?></h6>
+                      <span class="text-xs"><?=$peg['jurusan']?></span>
+                      <hr class="horizontal dark my-2">
+                      <h5 class="mb-0"><?=$peg['namalengkap']?></h5>
+                    </div>
+                    <script>
+    // Ambil nilai NIS
+    var nis = "<?=$peg['nis']?>";
+
+    // URL untuk menghasilkan QR code dari Google Charts API
+    var qrCodeUrl = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=" + encodeURIComponent(nis);
+
+    // Atur gambar sumber QR code
+    document.getElementById("qrCode").src = qrCodeUrl;
+</script>
           </div>
         </div>
         <div class="col-12 col-xl-4">
