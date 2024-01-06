@@ -16,7 +16,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Apakah anda benar ingin Logout?</h5>
                 </div>
-                <div class="modal-body">Pilih "Logout" di bawah untuk kembali ke beranda utama.</div>
+                <div class="modal-body">Pilih "Logout" di bawah untuk kembali ke menu awal.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
                     <a class="btn btn-primary" href="logout">Logout</a>
