@@ -18,10 +18,28 @@ if (!isset($_SESSION['nis'])) {
 <html lang="en">
 
 <head>
+
+<style>
+    /* Menangani tampilan hp */
+    @media only screen and (max-width: 600px) {
+      .br-mobile {
+        display: block; /* Munculkan <br> pada tampilan mobile */
+      }
+    }
+
+    /* Sembunyikan <br> pada tampilan selain mobile */
+    @media only screen and (min-width: 601px) {
+      .br-mobile {
+        display: none;
+      }
+    }
+  </style>
+
   <title>
     Beranda
   </title>
 <?php include('link.php');?>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -294,7 +312,7 @@ if (!isset($_SESSION['nis'])) {
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Hadir</p>
                     </div>
-                    <h4 class="font-weight-bolder">36 Hari</h4>
+                    <h4 class="font-weight-bolder">36 <br class="br-mobile">Hari</h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -317,7 +335,9 @@ if (!isset($_SESSION['nis'])) {
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Izin</p>
                     </div>
-                    <h4 class="font-weight-bolder">2 Hari</h4>
+                    <h4 class="font-weight-bolder text-center-mobile">
+                      2 <br class="br-mobile">Hari
+                    </h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -340,7 +360,7 @@ if (!isset($_SESSION['nis'])) {
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Sakit</p>
                     </div>
-                    <h4 class="font-weight-bolder">435 Hari</h4>
+                    <h4 class="font-weight-bolder">435 <br class="br-mobile">Hari</h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -363,7 +383,7 @@ if (!isset($_SESSION['nis'])) {
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Telat</p>
                     </div>
-                    <h4 class="font-weight-bolder">43 Hari</h4>
+                    <h4 class="font-weight-bolder">43 <br class="br-mobile">Hari</h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
