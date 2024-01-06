@@ -150,8 +150,9 @@
             <div class="card-body p-3">
               <div class="row">
                 <div class="col-lg-6">
+                  
                 <?php
-                
+
                 date_default_timezone_set('Asia/Jakarta');
 
                 $tampilPeg = mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
