@@ -29,6 +29,22 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
 
    ?>
 
+<style>
+    /* Tambahkan class br-mobile hanya untuk tampilan mobile */
+    @media only screen and (max-width: 600px) {
+      .br-mobile {
+        display: block; /* Munculkan <br> pada tampilan mobile */
+      }
+    }
+
+    /* Sembunyikan <br> pada tampilan selain mobile */
+    @media only screen and (min-width: 601px) {
+      .br-mobile {
+        display: none;
+      }
+    }
+  </style>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -190,6 +206,7 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
           </div>
         </div>
         <div class="col-12 col-xl-4">
+          <br class="br-mobile">
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
               <div class="row">
@@ -261,6 +278,8 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
           </div>
         </div>
         <div class="col-12 col-xl-4">
+        <br class="br-mobile">
+        <br class="br-mobile">
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
               <h6 class="mb-0">Conversations</h6>
@@ -322,6 +341,8 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
           </div>
         </div>
         <div class="col-12 mt-4">
+        <br class="br-mobile">
+        <br class="br-mobile">
           <div class="card mb-4">
             <div class="card-header pb-0 p-3">
               <h6 class="mb-1">Data Diri Murid</h6>
