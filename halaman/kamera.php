@@ -53,6 +53,7 @@ function scanQRCode() {
     console.log('QR Code detected:', code.data);
      // Mengirim data NIS ke skrip PHP
      sendDataToPHP(code.data);
+     insertDataToAbsen(code.data); // Memasukkan data absensi ke dalam database
   }
 
   requestAnimationFrame(scanQRCode); // Melanjutkan scanning secara terus-menerus
@@ -63,6 +64,18 @@ function sendDataToPHP(nis) {
     .then(response => response.text())
     .then(data => {
       resultDiv.innerText = data; // Menampilkan hasil dari skrip PHP di dalam div result
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+function insertDataToAbsen(nis) {
+  // Mengirim data ke skrip PHP untuk memasukkan data absensi
+  fetch('prosesmasukin.php?nis=' + nis + '&namalengkap=' + 'namalengkap' + '&kelas=' + 'kelas' + '&jurusan=' + 'jurusan') // Ganti nilai 'nama_siswa', 'kelas_siswa', dan 'jurusan_siswa' dengan data yang sesuai
+    .then(response => response.text())
+    .then(data => {
+      console.log(data); // Menampilkan hasil dari skrip PHP di konsol
     })
     .catch(error => {
       console.error('Error:', error);
