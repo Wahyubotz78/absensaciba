@@ -44,6 +44,31 @@ if (!isset($_SESSION['nis'])) {
 
 <body class="g-sidenav-show  bg-gray-100">
 
+<?php
+      // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
+      $userAgent = $_SERVER['HTTP_USER_AGENT'];
+      $isMobile = false;
+
+      // Daftar kata kunci yang mungkin muncul dalam user agent untuk perangkat mobile
+      $mobileKeywords = ['Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry', 'Opera Mini', 'Mobile', 'Tablet'];
+
+      // Periksa apakah ada kata kunci perangkat mobile dalam user agent
+      foreach ($mobileKeywords as $keyword) {
+          if (stripos($userAgent, $keyword) !== false) {
+              $isMobile = true;
+              break;
+          }
+      }
+
+      // Sertakan footer.php hanya jika pengguna mengakses melalui perangkat mobile
+      if ($isMobile) {
+      }
+
+      else {
+        include('sidebar.php');
+      }
+      ?>
+
 <?php include('navbar.php');?>
     <div class="container-fluid py-4">
       <div class="row">
@@ -754,7 +779,28 @@ if (!isset($_SESSION['nis'])) {
         </div>
       </div>
 
-    <?php include('footer.php');?>
+      <?php
+      // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
+      $userAgent = $_SERVER['HTTP_USER_AGENT'];
+      $isMobile = false;
+
+      // Daftar kata kunci yang mungkin muncul dalam user agent untuk perangkat mobile
+      $mobileKeywords = ['Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry', 'Opera Mini', 'Mobile', 'Tablet'];
+
+      // Periksa apakah ada kata kunci perangkat mobile dalam user agent
+      foreach ($mobileKeywords as $keyword) {
+          if (stripos($userAgent, $keyword) !== false) {
+              $isMobile = true;
+              break;
+          }
+      }
+
+      // Sertakan footer.php hanya jika pengguna mengakses melalui perangkat mobile
+      if ($isMobile) {
+        include('footer.php');
+      }
+
+      ?>
 
     </div>
   </main>

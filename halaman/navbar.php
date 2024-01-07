@@ -36,8 +36,6 @@
               switch ($page) {
                   case 'beranda':
                       return 'Beranda';
-                  case 'toko':
-                      return 'Toko';
                   // Tambahkan kasus lain sesuai kebutuhan
                   default:
                       return ucfirst($page); // Default: Gunakan huruf kapital pada nama file
