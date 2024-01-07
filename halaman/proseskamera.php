@@ -1,30 +1,29 @@
 <?php
-// Koneksi ke database (sesuaikan dengan informasi database Anda)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "absensaciba";
+// Pastikan untuk mengatur informasi koneksi database Anda
+include '../koneksi.php';
 
-// Buat koneksi
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Mendapatkan data dari NIS yang di-scan (misalnya, disimpan dalam variabel $_GET atau $_POST)
+if(isset($_GET['nis'])) {
+    $nis = $_GET['nis'];
 
-// Cek koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+    // Membuat query untuk mengambil data dari tabel datamurid berdasarkan NIS
+    $sql = "SELECT * FROM datamurid WHERE nis = $nis";
+    $result = $koneksi->query($sql);
 
-// Ambil data NIS dari request
-$data = json_decode(file_get_contents('php://input'), true);
-$nis = $data['nis'];
-
-// Simpan NIS ke dalam tabel database absen
-$sql = "INSERT INTO absen (nis) VALUES ('$nis')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Data berhasil disimpan";
+    if ($result->num_rows > 0) {
+        // Output data dari setiap baris
+        while($row = $result->fetch_assoc()) {
+            echo "NIS: " . $row["nis"]. "<br>";
+            echo "Nama: " . $row["namalengkap"]. "<br>";
+            echo "Kelas: " . $row["kelas"]. "<br>";
+            echo "Jurusan: " . $row["jurusan"]. "<br>";
+        }
+    } else {
+        echo "Data tidak ditemukan untuk NIS: " . $nis;
+    }
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "NIS tidak tersedia.";
 }
 
-$conn->close();
+$koneksi->close();
 ?>

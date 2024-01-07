@@ -43,6 +43,7 @@ if (!isset($_SESSION['nis'])) {
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
+<<<<<<< HEAD
 
 <?php
       // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
@@ -69,6 +70,9 @@ if (!isset($_SESSION['nis'])) {
       }
       ?>
 
+=======
+<?php include('sidebar.php');?>
+>>>>>>> fed9d57 (scan camera udah bisa nampil tapi tinggal inputnya)
 <?php include('navbar.php');?>
     <div class="container-fluid py-4">
       <div class="row">
@@ -277,7 +281,7 @@ if (!isset($_SESSION['nis'])) {
                   <div class="border-radius-lg h-100">
                     <img src="../assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                     <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                      <img style="border-radius: 10px;" class="w-100 position-relative" src="<?= $ori; ?>" alt="fotomurid">
+                      <img style="border-radius: 10px;" class="w-100 position-relative" src="<?= $preng; ?>" alt="fotomurid">
                     </div>
                   </div>
                 </div>
