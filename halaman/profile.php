@@ -59,7 +59,30 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
         							$peg    =mysqli_fetch_array($tampilPeg);
     							?>
 <body class="g-sidenav-show bg-gray-100">
-<?php include('sidebar.php');?>
+<?php
+      // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
+      $userAgent = $_SERVER['HTTP_USER_AGENT'];
+      $isMobile = false;
+
+      // Daftar kata kunci yang mungkin muncul dalam user agent untuk perangkat mobile
+      $mobileKeywords = ['Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry', 'Opera Mini', 'Mobile', 'Tablet'];
+
+      // Periksa apakah ada kata kunci perangkat mobile dalam user agent
+      foreach ($mobileKeywords as $keyword) {
+          if (stripos($userAgent, $keyword) !== false) {
+              $isMobile = true;
+              break;
+          }
+      }
+
+      // Sertakan footer.php hanya jika pengguna mengakses melalui perangkat mobile
+      if ($isMobile) {
+      }
+
+      else {
+        include('sidebar.php');
+      }
+      ?>
   <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
   <?php include('navbar.php');?>
     <div class="container-fluid">
@@ -534,7 +557,28 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
           </div>
         </div>
       </div>
-      <?php include('footer.php');?>
+      <?php
+      // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
+      $userAgent = $_SERVER['HTTP_USER_AGENT'];
+      $isMobile = false;
+
+      // Daftar kata kunci yang mungkin muncul dalam user agent untuk perangkat mobile
+      $mobileKeywords = ['Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry', 'Opera Mini', 'Mobile', 'Tablet'];
+
+      // Periksa apakah ada kata kunci perangkat mobile dalam user agent
+      foreach ($mobileKeywords as $keyword) {
+          if (stripos($userAgent, $keyword) !== false) {
+              $isMobile = true;
+              break;
+          }
+      }
+
+      // Sertakan footer.php hanya jika pengguna mengakses melalui perangkat mobile
+      if ($isMobile) {
+        include('footer.php');
+      }
+
+      ?>
     </div>
   </div>
 
