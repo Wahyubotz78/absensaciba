@@ -98,7 +98,7 @@
                           <a class="nav__link" href="profile">
                               <img class="img-profile rounded-circle" style="height: auto; width: 32px;"
                                   src="../fotomurid/<?=$peg['fotomurid']?>">
-								  <span style="color: #37517e;" class="nav__name">Profile</span>
+								  <span style="color: #37517e;" class="nav__name"><?php echo (basename($_SERVER['PHP_SELF']) == 'profile.php') ? '<strong>Profile</strong>' : 'Profile'; ?></span>
                           </a>
                       </li>
 
