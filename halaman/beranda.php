@@ -44,8 +44,6 @@ if (!isset($_SESSION['nis'])) {
 
 <body class="g-sidenav-show  bg-gray-100">
 
-<?php include('sidebar.php');?>
-
 <?php include('navbar.php');?>
     <div class="container-fluid py-4">
       <div class="row">
