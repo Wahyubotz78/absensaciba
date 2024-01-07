@@ -43,7 +43,6 @@ if (!isset($_SESSION['nis'])) {
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-<<<<<<< HEAD
 
 <?php
       // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
@@ -70,9 +69,6 @@ if (!isset($_SESSION['nis'])) {
       }
       ?>
 
-=======
-<?php include('sidebar.php');?>
->>>>>>> fed9d57 (scan camera udah bisa nampil tapi tinggal inputnya)
 <?php include('navbar.php');?>
     <div class="container-fluid py-4">
       <div class="row">

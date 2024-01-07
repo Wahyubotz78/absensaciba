@@ -7,7 +7,6 @@
 				<div class="nav__menu" id="nav-menu">
           <br>
 					<ul class="nav__list">
-<<<<<<< HEAD
 		<li class="nav__item">
 		<center>
         <a class="nav__link <?php echo (basename($_SERVER['PHP_SELF']) == 'beranda.php') ? 'active' : ''; ?>" href="../halaman/beranda">
@@ -105,26 +104,6 @@
 
 
 
-=======
-						<li class="nav__item">
-							<a href="#" class="nav__link">
-								<i class='bx bx-table nav__icon'></i>
-								<span class="nav__name">Izin</span>
-							</a>
-						</li>
-						<li class="nav__item">
-							<a href="#" class="nav__link">
-								<i class='bx bx-home-alt nav__icon'></i>
-								<span class="nav__name">Beranda</span>
-							</a>
-						</li>
-						<li class="nav__item">
-							<a href="#" class="nav__link">
-								<i class='bx bx-qr nav__icon'></i>
-								<span class="nav__name">Cetak QR</span>
-							</a>
-						</li>
->>>>>>> fed9d57 (scan camera udah bisa nampil tapi tinggal inputnya)
 					</ul>
 				</div>
 			</div>
