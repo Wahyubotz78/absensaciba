@@ -3,18 +3,28 @@
 <head>
   <title>QR Scanner</title>
   <style>
+    body {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      margin-left: 25px;
+      flex-direction: row;
+    }
     #video {
       width: 50%;
       height: auto;
     }
     #result {
-      margin-top: 20px;
+      margin-left: 80px; /* Contoh jarak antara kamera dan hasil */
       font-weight: bold;
+      font-size: 90px; /* Contoh ukuran font yang diperbesar */
     }
   </style>
 </head>
 <body>
-  <video id="video" autoplay></video>
+<video id="video" autoplay></video>
   <div id="result"></div>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
   <script src="script.js"></script>
@@ -76,6 +86,7 @@ function insertDataToAbsen(nis) {
     .then(response => response.text())
     .then(data => {
       console.log(data); // Menampilkan hasil dari skrip PHP di konsol
+      resultDiv.innerText = data; // Menampilkan hasil dari skrip PHP di dalam div result
     })
     .catch(error => {
       console.error('Error:', error);
