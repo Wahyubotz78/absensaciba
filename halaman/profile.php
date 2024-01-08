@@ -96,7 +96,7 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
             <img src="../fotomurid/<?=$peg['fotomurid']?>" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
 
             <!-- Larger rounded button with camera icon -->
-            <button class="btn btn-sm btn-primary position-absolute top-0 start-0 m-5 rounded-circle p-2">
+            <button href="#" data-toggle="modal" data-target="#gantippModal" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true" class="btn btn-sm btn-primary position-absolute top-0 start-0 m-5 rounded-circle p-2">
                 <i class="fas fa-camera" style="font-size: 14px;"></i>
             </button>
             </div>
