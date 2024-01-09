@@ -32,18 +32,20 @@
 </html>
 
 <script>
-    const video = document.getElementById('video');
+const video = document.getElementById('video');
 const resultDiv = document.getElementById('result');
 
-navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-  .then(function(stream) {
+// Request access to the camera
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(function (stream) {
     video.srcObject = stream;
     video.play();
   })
-  .catch(function(err) {
+  .catch(function (err) {
     console.error('Error accessing the camera:', err);
   });
 
+// Function to scan QR codes
 function scanQRCode() {
   const canvasElement = document.createElement('canvas');
   const canvas = canvasElement.getContext('2d');
@@ -55,45 +57,53 @@ function scanQRCode() {
 
   canvas.drawImage(video, 0, 0, width, height);
   const imageData = canvas.getImageData(0, 0, width, height);
-  const code = jsQR(imageData.data, imageData.width, imageData.height, {
-    inversionAttempts: 'dontInvert',
-  });
 
-  if (code) {
-    console.log('QR Code detected:', code.data);
-     // Mengirim data NIS ke skrip PHP
-     sendDataToPHP(code.data);
-     insertDataToAbsen(code.data); // Memasukkan data absensi ke dalam database
+  // Using try-catch to handle potential errors in jsQR library
+  try {
+    const code = jsQR(imageData.data, imageData.width, imageData.height, {
+      inversionAttempts: 'dontInvert',
+    });
+
+    if (code) {
+      console.log('QR Code detected:', code.data);
+      sendDataToPHP(code.data);
+      insertDataToAbsen(code.data);
+    }
+  } catch (error) {
+    console.error('Error decoding QR code:', error);
   }
 
-  requestAnimationFrame(scanQRCode); // Melanjutkan scanning secara terus-menerus
+  requestAnimationFrame(scanQRCode);
 }
 
+// Function to send data to PHP script
 function sendDataToPHP(nis) {
-  fetch('proseskamera.php?nis=' + nis) // Mengirim NIS ke skrip PHP menggunakan GET request
+  fetch('proseskamera.php?nis=' + nis)
     .then(response => response.text())
     .then(data => {
-      resultDiv.innerText = data; // Menampilkan hasil dari skrip PHP di dalam div result
+      resultDiv.innerText = data;
     })
     .catch(error => {
       console.error('Error:', error);
     });
 }
 
+// Function to insert data into the database
 function insertDataToAbsen(nis) {
-  // Mengirim data ke skrip PHP untuk memasukkan data absensi
-  fetch('prosesmasukin.php?nis=' + nis + '&namalengkap=' + 'namalengkap' + '&kelas=' + 'kelas' + '&jurusan=' + 'jurusan') // Ganti nilai 'nama_siswa', 'kelas_siswa', dan 'jurusan_siswa' dengan data yang sesuai
+  fetch('prosesmasukin.php?nis=' + nis + '&namalengkap=' + 'namalengkap' + '&kelas=' + 'kelas' + '&jurusan=' + 'jurusan')
     .then(response => response.text())
     .then(data => {
-      console.log(data); // Menampilkan hasil dari skrip PHP di konsol
-      resultDiv.innerText = data; // Menampilkan hasil dari skrip PHP di dalam div result
+      console.log(data);
+      resultDiv.innerText = data;
     })
     .catch(error => {
       console.error('Error:', error);
     });
 }
 
-video.addEventListener('loadeddata', function() {
-  requestAnimationFrame(scanQRCode); // Memulai scanning ketika video siap
+// Event listener for when the video is ready
+video.addEventListener('loadeddata', function () {
+  requestAnimationFrame(scanQRCode);
 });
+
 </script>

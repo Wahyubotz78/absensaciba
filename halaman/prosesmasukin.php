@@ -8,8 +8,11 @@ if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) &
     $jurusan = $_GET['jurusan'];
 
     // Mendapatkan data murid dari tabel datamurid berdasarkan NIS
-    $sql_select = "SELECT * FROM datamurid WHERE nis = $nis";
-    $result_select = $koneksi->query($sql_select);
+    $sql_select = "SELECT * FROM datamurid WHERE nis = ?";
+    $stmt = $koneksi->prepare($sql_select);
+    $stmt->bind_param("s", $nis); // Assuming nis is a string, adjust the type accordingly
+    $stmt->execute();
+    $result_select = $stmt->get_result();
 
     if ($result_select->num_rows > 0) {
         while($row = $result_select->fetch_assoc()) {
