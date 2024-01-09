@@ -13,10 +13,7 @@ if(isset($_GET['nis'])) {
     if ($result->num_rows > 0) {
         // Output data dari setiap baris
         while($row = $result->fetch_assoc()) {
-            echo "NIS: " . $row["nis"] '<br>'."";
-            echo "Nama: " . $row["namalengkap"] '<br>'."";
-            echo "Kelas: " . $row["kelas"] '<br>'."";
-            echo "Jurusan: " . $row["jurusan"] '<br>'."";
+            echo "";
         }
     } else {
         echo "Data yang di Scan Tidak Valid";
