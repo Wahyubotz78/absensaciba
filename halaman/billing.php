@@ -19,7 +19,7 @@ if (!isset($_SESSION['nis'])) {
 
 <head>
   <title>
-    Soft UI Dashboard by Creative Tim
+    Billing
   </title>
   <?php include('link.php');?>
 </head>

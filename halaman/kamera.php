@@ -1,35 +1,124 @@
+<?php
+      session_start();
+      // Tempatkan baris-baris lainnya yang ingin dijalankan di sini
+      // Aktifkan semua jenis kesalahan
+error_reporting(E_ALL);
+// Tampilkan pesan kesalahan ke layar
+ini_set('display_errors', 1);
+
+// Periksa apakah sesi pengguna ada atau tidak
+if (!isset($_SESSION['nis'])) {
+    // Jika tidak ada sesi pengguna, alihkan ke halaman login
+    header("Location: login");
+    exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
+}
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>QR Scanner</title>
+  <title>
+    Scan QR
+  </title>
   <style>
-    body {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      margin-left: 25px;
-      flex-direction: row;
-    }
-    #video {
-      width: 50%;
-      height: auto;
-    }
-    #result {
-      margin-left: 80px; /* Contoh jarak antara kamera dan hasil */
-      font-weight: bold;
-      font-size: 24px; /* Contoh ukuran font yang diperbesar */
-    }
-  </style>
+  .video-wrapper {
+    position: relative;
+    width: 50%; /* Sesuaikan ukuran video sesuai kebutuhan */
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  #video {
+    width: 100%;
+    height: auto;
+  }
+
+  .result-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(50% - 80px); /* Sesuaikan ukuran dan margin kanan hasil sesuai kebutuhan */
+    margin-left: 80px;
+    font-weight: bold;
+    font-size: 24px;
+  }
+</style>
+
+<?php include('link.php');?>
 </head>
-<body>
-<video id="video" autoplay></video>
-  <div id="result"></div>
-  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
+
+<body class="g-sidenav-show  bg-gray-100">
+
+<?php
+      // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
+      $userAgent = $_SERVER['HTTP_USER_AGENT'];
+      $isMobile = false;
+
+      // Daftar kata kunci yang mungkin muncul dalam user agent untuk perangkat mobile
+      $mobileKeywords = ['Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry', 'Opera Mini', 'Mobile', 'Tablet'];
+
+      // Periksa apakah ada kata kunci perangkat mobile dalam user agent
+      foreach ($mobileKeywords as $keyword) {
+          if (stripos($userAgent, $keyword) !== false) {
+              $isMobile = true;
+              break;
+          }
+      }
+
+      // Sertakan footer.php hanya jika pengguna mengakses melalui perangkat mobile
+      if ($isMobile) {
+      }
+
+      else {
+        include('sidebar.php');
+      }
+      ?>
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+  <?php include('navbar.php');?>
+
+    <div class="container-fluid py-4">
+    <div class="col-lg-12">
+  <div class="card h-100 p-3">
+    <div class="video-wrapper">
+      <video id="video" autoplay></video>
+    </div>
+    <div class="result-wrapper">
+      <div id="result"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
+    <script src="script.js"></script>
+  </div>
+</div>
+
+      <?php
+      // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
+      $userAgent = $_SERVER['HTTP_USER_AGENT'];
+      $isMobile = false;
+
+      // Daftar kata kunci yang mungkin muncul dalam user agent untuk perangkat mobile
+      $mobileKeywords = ['Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry', 'Opera Mini', 'Mobile', 'Tablet'];
+
+      // Periksa apakah ada kata kunci perangkat mobile dalam user agent
+      foreach ($mobileKeywords as $keyword) {
+          if (stripos($userAgent, $keyword) !== false) {
+              $isMobile = true;
+              break;
+          }
+      }
+
+      // Sertakan footer.php hanya jika pengguna mengakses melalui perangkat mobile
+      if ($isMobile) {
+        include('footer.php');
+      }
+      ?>
+    </div>
+    </main>
+
+<?php include('script.php');?>
 
 <script>
 const video = document.getElementById('video');
@@ -108,3 +197,8 @@ video.addEventListener('loadeddata', function () {
 });
 
 </script>
+</body>
+
+
+
+</html>
