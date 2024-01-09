@@ -1,11 +1,26 @@
 <?php
+
 include '../koneksi.php';
+
+// Add content type and encoding header
+header('Content-Type: text/html; charset=utf-8');
 
 if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) && isset($_GET['jurusan'])) {
     $nis = $_GET['nis'];
+
+    // Validate NIS length
+    if(strlen($nis) !== 8 || !is_numeric($nis)) {
+        echo "Data yang di Scan Tidak Valid";
+        exit; // Stop execution if NIS is not valid
+    }
+
     $nama = $_GET['namalengkap'];
     $kelas = $_GET['kelas'];
     $jurusan = $_GET['jurusan'];
+
+    // Set database connection character set to utf8
+    $koneksi->set_charset("utf8");
+
 
     // Mendapatkan data murid dari tabel datamurid berdasarkan NIS
     $sql_select = "SELECT * FROM datamurid WHERE nis = ?";

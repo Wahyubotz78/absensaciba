@@ -7,7 +7,7 @@ if(isset($_GET['nis'])) {
     $nis = $_GET['nis'];
 
     // Membuat query untuk mengambil data dari tabel datamurid berdasarkan NIS
-    $sql = "SELECT * FROM datamurid WHERE nis = $nis";
+    $sql = "SELECT * FROM datamurid WHERE nis = '$nis'";
     $result = $koneksi->query($sql);
 
     if ($result->num_rows > 0) {
@@ -19,7 +19,7 @@ if(isset($_GET['nis'])) {
             echo "Jurusan: " . $row["jurusan"]. "<br>";
         }
     } else {
-        echo "Data tidak ditemukan untuk NIS: " . $nis;
+        echo "Data yang di Scan Tidak Valid";
     }
 } else {
     echo "NIS tidak tersedia.";
