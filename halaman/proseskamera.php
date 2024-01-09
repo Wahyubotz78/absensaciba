@@ -11,16 +11,8 @@ if(isset($_GET['nis'])) {
     $result = $koneksi->query($sql);
 
     if ($result->num_rows > 0) {
-        // Output data dari setiap baris
-        while($row = $result->fetch_assoc()) {
-            echo "";
-        }
-    } else {
-        echo "Data yang di Scan Tidak Valid";
-    }
-} else {
-    echo "NIS tidak tersedia.";
-}
+
+    } }
 
 $koneksi->close();
 ?>

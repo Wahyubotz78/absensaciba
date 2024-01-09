@@ -19,7 +19,7 @@
     #result {
       margin-left: 80px; /* Contoh jarak antara kamera dan hasil */
       font-weight: bold;
-      font-size: 90px; /* Contoh ukuran font yang diperbesar */
+      font-size: 24px; /* Contoh ukuran font yang diperbesar */
     }
   </style>
 </head>
@@ -81,7 +81,7 @@ function sendDataToPHP(nis) {
   fetch('proseskamera.php?nis=' + nis)
     .then(response => response.text())
     .then(data => {
-      resultDiv.innerText = data;
+      resultDiv.innerHTML = data; // Menggunakan innerHTML bukan innerText
     })
     .catch(error => {
       console.error('Error:', error);
@@ -94,12 +94,13 @@ function insertDataToAbsen(nis) {
     .then(response => response.text())
     .then(data => {
       console.log(data);
-      resultDiv.innerText = data;
+      resultDiv.innerHTML = data; // Menggunakan innerHTML bukan innerText
     })
     .catch(error => {
       console.error('Error:', error);
     });
 }
+
 
 // Event listener for when the video is ready
 video.addEventListener('loadeddata', function () {

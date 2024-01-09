@@ -1,3 +1,52 @@
+<style>
+  .success {
+    color: green;
+    animation: fadeIn 2s ease-out;
+  }
+
+  .error {
+    color: red;
+    animation: fadeIn 2s ease-out;
+  }
+
+  .info {
+    color: yellow;
+    animation: fadeIn 2s ease-out;
+  }
+
+  /* Style untuk ikon centang */
+  .success::before {
+    content: '\2713'; /* kode karakter unicode untuk centang */
+    font-family: 'Arial', sans-serif;
+    margin-right: 5px;
+  }
+
+  /* Style untuk ikon silang */
+  .error::before {
+    content: '\2717'; /* kode karakter unicode untuk silang */
+    font-family: 'Arial', sans-serif;
+    margin-right: 5px;
+  }
+
+  /* Style untuk ikon segitiga kuning */
+  .info::before {
+    content: '\25B6'; /* kode karakter unicode untuk segitiga */
+    font-family: 'Arial', sans-serif;
+    margin-right: 5px;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+
+
 <?php
 
 include '../koneksi.php';
@@ -46,7 +95,7 @@ if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) &
             $result_check_absensi = $koneksi->query($sql_check_absensi);
 
             if ($result_check_absensi->num_rows > 0) {
-                echo "Murid dengan NIS $nis sudah melakukan absensi hari ini.";
+                echo "<div class='info'>Murid dengan NIS $nis sudah melakukan absensi hari ini.</div>";
             } else {
 
             // Query untuk memasukkan data ke dalam tabel absen
@@ -54,17 +103,17 @@ if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) &
                            VALUES ('$tanggal_absen', '$jam_absen', '$nis', '$nama_lengkap', '$kelas', '$jurusan', '$keterangan', 1, 0)";
 
             if ($koneksi->query($sql_insert) === TRUE) {
-                echo "Data absensi berhasil dimasukkan.";
+                echo "<div class='success'>Data absensi berhasil dimasukkan.</div>";
             } else {
-                echo "Error: " . $sql_insert . "<br>" . $koneksi->error;
+                echo "<div class='error'>Error: " . $sql_insert . "<br>" . $koneksi->error . "</div>";
             }
         }
     }
     } else {
-        echo "Data tidak ditemukan untuk NIS: " . $nis;
+        echo "<div class='error'>Data tidak ditemukan untuk NIS: " . $nis . "</div>";
     }
 } else {
-    echo "Data yang diperlukan tidak lengkap.";
+    echo "<div class='error'>Data yang diperlukan tidak lengkap.</div>";
 }
 
 $koneksi->close();
