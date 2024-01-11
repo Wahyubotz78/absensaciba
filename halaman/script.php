@@ -395,6 +395,61 @@ if(isset($_POST['upload-pp'])) {
         });
     </script>
 
+<!-- Wajib ada inih kalo nga ga ke refresh -->
+
+<style>
+    #current-time {
+      display: none;
+    }
+  </style>
+
+<h1 id="current-time"></h1>
+
+<!-- Tambahkan di bagian bawah halaman HTML -->
+<script>
+    function updateCurrentTime() {
+      var currentTime = new Date();
+      var hours = currentTime.getHours();
+      var minutes = currentTime.getMinutes();
+      var seconds = currentTime.getSeconds();
+
+      var formattedTime = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds);
+
+      document.getElementById("current-time").innerText = "Waktu sekarang: " + formattedTime;
+
+      // Auto-refresh pada waktu tertentu
+      var refreshTimes = [
+        { hour: 5, minute: 0, second: 0 },
+        { hour: 12, minute: 0, second: 0 },
+        { hour: 16, minute: 0, second: 0 },
+        { hour: 20, minute: 41, second: 30 }
+      ];
+
+      for (var i = 0; i < refreshTimes.length; i++) {
+        var refreshHour = refreshTimes[i].hour;
+        var refreshMinute = refreshTimes[i].minute;
+        var refreshSecond = refreshTimes[i].second;
+
+        if (hours === refreshHour && minutes === refreshMinute && seconds === refreshSecond) {
+          location.reload(true);
+          break;
+        }
+      }
+    }
+
+    function padZero(number) {
+      return (number < 10 ? '0' : '') + number;
+    }
+
+    setInterval(updateCurrentTime, 1000); // Panggil fungsi updateCurrentTime setiap detik
+  </script>
+
+
+
+
+
+
+
 
 
     

@@ -18,81 +18,85 @@ if (!isset($_SESSION['nis'])) {
 <html lang="en">
 
 <head>
-  <title>
-    Scan QR
-  </title>
+  <title>Scan QR</title>
   <style>
-  .video-wrapper {
-    position: relative;
-    width: 50%; /* Sesuaikan ukuran video sesuai kebutuhan */
-    height: auto;
-    border-radius: 10px;
-    overflow: hidden;
-  }
 
-  #video {
-    width: 100%;
-    height: auto;
-  }
+    /* Menangani tampilan hp */
+    @media only screen and (max-width: 600px) {
+      .br-mobile {
+        display: block; /* Munculkan <br> pada tampilan mobile */
+      }
+    }
 
-  .result-wrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: calc(50% - 80px); /* Sesuaikan ukuran dan margin kanan hasil sesuai kebutuhan */
-    margin-left: 80px;
-    font-weight: bold;
-    font-size: 24px;
-  }
-</style>
+    /* Sembunyikan <br> pada tampilan selain mobile */
+    @media only screen and (min-width: 601px) {
+      .br-mobile {
+        display: none;
+      }
+    }
 
-<?php include('link.php');?>
+    #video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    #result {
+      margin-left: 80px; /* Contoh jarak antara kamera dan hasil */
+      font-weight: bold;
+      font-size: 90px; /* Contoh ukuran font yang diperbesar */
+    }
+  </style>
+
+
+
+
+  <?php include('link.php'); ?>
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show bg-gray-100">
 
-<?php
-      // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
-      $userAgent = $_SERVER['HTTP_USER_AGENT'];
-      $isMobile = false;
+  <?php
+  $userAgent = $_SERVER['HTTP_USER_AGENT'];
+  $isMobile = false;
 
-      // Daftar kata kunci yang mungkin muncul dalam user agent untuk perangkat mobile
-      $mobileKeywords = ['Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry', 'Opera Mini', 'Mobile', 'Tablet'];
+  $mobileKeywords = ['Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry', 'Opera Mini', 'Mobile', 'Tablet'];
 
-      // Periksa apakah ada kata kunci perangkat mobile dalam user agent
-      foreach ($mobileKeywords as $keyword) {
-          if (stripos($userAgent, $keyword) !== false) {
-              $isMobile = true;
-              break;
-          }
-      }
+  foreach ($mobileKeywords as $keyword) {
+    if (stripos($userAgent, $keyword) !== false) {
+      $isMobile = true;
+      break;
+    }
+  }
 
-      // Sertakan footer.php hanya jika pengguna mengakses melalui perangkat mobile
-      if ($isMobile) {
-      }
+  if ($isMobile) {
+  } else {
+    include('sidebar.php');
+  }
+  ?>
 
-      else {
-        include('sidebar.php');
-      }
-      ?>
-
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-
-  <?php include('navbar.php');?>
-
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <?php include('navbar.php'); ?>
     <div class="container-fluid py-4">
-    <div class="col-lg-12">
-  <div class="card h-100 p-3">
-    <div class="video-wrapper">
-      <video id="video" autoplay></video>
-    </div>
-    <div class="result-wrapper">
-      <div id="result"></div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
-    <script src="script.js"></script>
-  </div>
-</div>
+      <div class="row">
+      <div class="col-lg-6  ">
+        <div class="card h-100 p-3 video-result-container">
+          <div class="video-wrapper">
+            <video id="video" autoplay></video>
+          </div>
+          <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
+          <script src="script.js"></script>
+        </div>
+      </div>
+
+      <div class="col-lg-6  ">
+        <br class="br-mobile">
+        <div class="card h-100 p-3 video-result-container">
+        <div id="resultContainer"></div>
+          <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
+          <script src="script.js"></script>
+        </div>
+      </div>
+      </div>
 
       <?php
       // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
@@ -183,12 +187,16 @@ function insertDataToAbsen(nis) {
     .then(response => response.text())
     .then(data => {
       console.log(data);
-      resultDiv.innerHTML = data; // Menggunakan innerHTML bukan innerText
+
+      // Tampilkan hasil di elemen dengan id 'resultContainer'
+      const resultContainer = document.getElementById('resultContainer');
+      resultContainer.innerHTML = data; // Gunakan innerHTML alih-alih innerText
     })
     .catch(error => {
       console.error('Error:', error);
     });
 }
+
 
 
 // Event listener for when the video is ready

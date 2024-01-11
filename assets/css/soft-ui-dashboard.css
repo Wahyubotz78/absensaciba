@@ -224,9 +224,12 @@ address {
 }
 
 ol,
-ul {
+
+/* PADDING LEFT GW NONAKTIFIN DULS BIAR TAMPILAN HP FOOTBAR GA ERROR */
+
+/* ul {
   padding-left: 2rem;
-}
+} */
 
 ol,
 ul,
