@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 12 Jan 2024 pada 20.58
+-- Waktu pembuatan: 09 Jan 2024 pada 07.04
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -35,7 +35,6 @@ CREATE TABLE `absen` (
   `namalengkap` varchar(255) NOT NULL,
   `kelas` varchar(255) NOT NULL,
   `jurusan` varchar(255) NOT NULL,
-  `fotomurid` varchar(255) NOT NULL,
   `keterangan` varchar(255) NOT NULL,
   `masuk` varchar(255) NOT NULL,
   `keluar` varchar(255) NOT NULL
@@ -45,8 +44,10 @@ CREATE TABLE `absen` (
 -- Dumping data untuk tabel `absen`
 --
 
-INSERT INTO `absen` (`id`, `tanggalabsen`, `jamabsen`, `nis`, `namalengkap`, `kelas`, `jurusan`, `fotomurid`, `keterangan`, `masuk`, `keluar`) VALUES
-(37, '2024-01-12', '20:52:15', '12345678', 'Josdunt Sukandar Immanuel', 'XII', 'Teknik Komputer dan Jaringan', 'jessisayang.jpg', 'H', '1', '0');
+INSERT INTO `absen` (`id`, `tanggalabsen`, `jamabsen`, `nis`, `namalengkap`, `kelas`, `jurusan`, `keterangan`, `masuk`, `keluar`) VALUES
+(22, '2024-01-07', '23:51:58', '77777777', 'Kenkunto Ajinomo Tohiro', 'XX', 'Teknik Sipil', 'H', '1', '0'),
+(23, '2024-01-08', '13:34:46', '77777777', 'Kenkunto Ajinomo Tohiro', 'XX', 'Teknik Sipil', 'H', '1', '0'),
+(24, '2024-01-08', '13:35:24', '87654321', 'Japzslure Efef Jinan', 'X', 'Desain Permodelan dan Informasi Bangunan', 'H', '1', '0');
 
 -- --------------------------------------------------------
 
@@ -72,7 +73,7 @@ INSERT INTO `datamurid` (`id`, `nis`, `namalengkap`, `kelas`, `jurusan`, `fotomu
 (2, '66666666', 'Admin Absen', '', 'Admin', ''),
 (3, '44444444', 'Ahmad Yusup S.kom', '', 'Guru', ''),
 (4, '87654321', 'Japzslure Efef Jinan', 'X', 'Desain Permodelan dan Informasi Bangunan', 'jessi.jpg'),
-(5, '77777777', 'Kenkunto Ajinomo Tohiro', 'XX', 'Teknik Sipil', 'udin.jpg');
+(5, '77777777', 'Kenkunto Ajinomo Tohiro', 'XX', 'Teknik Sipil', '');
 
 -- --------------------------------------------------------
 
@@ -126,7 +127,7 @@ ALTER TABLE `jamabsen`
 -- AUTO_INCREMENT untuk tabel `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `datamurid`
