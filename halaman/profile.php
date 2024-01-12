@@ -274,7 +274,8 @@ if(isset($_POST['submit']))
             <br class="mobile-br">
             <div class="card-header mx-4 p-3 text-center">
                       <div class="icon icon-shape icon-xl shadow text-center border-radius-xl">
-                        <img id="qrCode" style="border-radius: 10px;" class="w-100 position-relative">
+<!-- Tambahkan elemen untuk menampilkan QR code -->
+<img id="qrCode" src="https://api.qrserver.com/v1/create-qr-code/?data=<?=$peg['nis']?>&size=150x150" alt="QR Code">
                       </div>
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
@@ -283,16 +284,6 @@ if(isset($_POST['submit']))
                       <hr class="horizontal dark my-2">
                       <h5 class="mb-0"><?=$peg['namalengkap']?></h5>
                     </div>
-                    <script>
-    // Ambil nilai NIS
-    var nis = "<?=$peg['nis']?>";
-
-    // URL untuk menghasilkan QR code dari Google Charts API
-    var qrCodeUrl = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=" + encodeURIComponent(nis);
-
-    // Atur gambar sumber QR code
-    document.getElementById("qrCode").src = qrCodeUrl;
-</script>
           </div>
         </div>
         <div class="col-12 col-xl-4">
