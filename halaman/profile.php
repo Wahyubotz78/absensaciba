@@ -89,7 +89,7 @@ if(isset($_POST['submit']))
 
 <head>
   <title>
-    Soft UI Dashboard by Creative Tim
+    Profile
   </title>
   <?php include('link.php');?>
 </head>
