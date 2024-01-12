@@ -66,7 +66,7 @@ if(isset($_POST['submit']))
    $query=mysqli_query($koneksi,"update datamurid set fotomurid='$imgnewfile' where nis='$_SESSION[nis]'");
    if($query)
    {
-   $msg="Post Feature Image updated ";
+    echo '<meta http-equiv="refresh" content="0;url=profile.php">';
    }
    else{
    $error="Something went wrong . Please try again.";    
