@@ -183,7 +183,7 @@ function sendDataToPHP(nis) {
 
 // Function to insert data into the database
 function insertDataToAbsen(nis) {
-  fetch('prosesmasukin.php?nis=' + nis + '&namalengkap=' + 'namalengkap' + '&kelas=' + 'kelas' + '&jurusan=' + 'jurusan')
+  fetch('prosesmasukin.php?nis=' + nis + '&namalengkap=' + 'namalengkap' + '&kelas=' + 'kelas' + '&jurusan=' + 'jurusan' + '&fotomurid=' + 'fotomurid')
     .then(response => response.text())
     .then(data => {
       console.log(data);
