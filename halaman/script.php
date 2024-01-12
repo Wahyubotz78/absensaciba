@@ -42,47 +42,38 @@
   </style>
 
 <?php
-if(isset($_POST['upload-pp'])) {
-    if(isset($_FILES['foto'])) {
-        $foto_name = $_FILES['foto']['name'];
-        $foto_size = $_FILES['foto']['size'];
-        $foto_tmp = $_FILES['foto']['tmp_name'];
-        $foto_type = $_FILES['foto']['type'];
-
-        // Mendapatkan ekstensi file
-        $foto_ext = strtolower(pathinfo($foto_name, PATHINFO_EXTENSION));
-
-        // Mengizinkan hanya format gambar tertentu (misalnya: jpg, jpeg, png)
-        $allowed_extensions = array("jpg", "jpeg", "png");
-
-        if(in_array($foto_ext, $allowed_extensions)) {
-            // Tentukan lokasi penyimpanan file yang di-upload
-            $upload_path = "../fotomurid/" . $foto_name;
-
-            // Pindahkan file ke lokasi penyimpanan
-            move_uploaded_file($foto_tmp, $upload_path);
-
-            // Cek rasio gambar
-            list($width, $height) = getimagesize($upload_path);
-            if ($width == $height) {
-                // Proses lanjutan sesuai kebutuhan, misalnya menyimpan nama file ke database
-                echo "File berhasil di-upload.";
-            } else {
-                // Hapus file yang di-upload karena tidak memenuhi rasio 1:1
-                unlink($upload_path);
-                echo "File yang di-upload tidak memenuhi rasio 1:1";
-            }
-        } else {
-            echo "Hanya file gambar dengan format JPG, JPEG, atau PNG yang diizinkan.";
-        }
-    } else {
-      echo "Tidak ada file yang di-upload.";
-    }
-}
+include '../koneksi.php';
+if(isset($_POST['submit']))
+   {
+   
+   $imgfile=$_FILES["fotomurid"]["name"];
+   // get the image extension
+   $extension = substr($imgfile,strlen($imgfile)-4,strlen($imgfile));
+   // allowed extensions
+   $allowed_extensions = array(".jpg","jpeg",".png",".gif");
+   // Validation for allowed extensions .in_array() function searches an array for a specific value.
+   if(!in_array($extension,$allowed_extensions))
+   {
+   echo "<script>alert('Invalid format. Only jpg / jpeg/ png /gif format allowed');</script>";
+   }
+   else
+   {
+   //rename the image file
+   $imgnewfile=md5($imgfile).$extension;
+   // Code for move image into directory
+   move_uploaded_file($_FILES["fotomurid"]["tmp_name"],"../fotomurid/".$imgnewfile);
+   
+   $query=mysqli_query($koneksi,"update datamurid set fotomurid='$imgnewfile' where nis='$_SESSION[nis]'");
+   if($query)
+   {
+   $msg="Post Feature Image updated ";
+   }
+   else{
+   $error="Something went wrong . Please try again.";    
+   } 
+   }
+   }
 ?>
-
-
-
       <!-- Ganti PP Modal-->
       <div class="modal fade" id="gantippModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -102,7 +93,7 @@ if(isset($_POST['upload-pp'])) {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="inputName2"><strong>Foto Profil (1:1)</strong></label>
-                      <input type="file" placeholder="Foto Profil" name="foto" class="form-control" onchange="previewImage()" accept="image/*">
+                      <input type="file" placeholder="Foto Profil" name="fotomurid" class="form-control" onchange="previewImage()" accept="image/*">
                       <span id="user-availability-status" style="font-size:14px;"></span>
                     </div>
                   </div>
@@ -114,7 +105,7 @@ if(isset($_POST['upload-pp'])) {
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
                 <!-- Button to trigger the file input dialog -->
-                <button class="btn btn-primary" type="submit" name="upload-pp">Ganti</button>
+                <button class="btn btn-primary" type="submit" name="submit">Ganti</button>
               </div>
               </form>
                 </div>
