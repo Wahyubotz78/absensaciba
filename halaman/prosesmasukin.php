@@ -127,7 +127,7 @@ if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) &
         }
     }
     } else {
-        echo "<div class='error'>Data tidak ditemukan untuk NIS: " . $nis . "</div>";
+        echo "<div class='error'>NIS tidak di temukan</div>";
     }
 } else {
     echo "<div class='error'>Data yang diperlukan tidak lengkap.</div>";
