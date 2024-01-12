@@ -274,8 +274,10 @@ if(isset($_POST['submit']))
             <br class="mobile-br">
             <div class="card-header mx-4 p-3 text-center">
                       <div class="icon icon-shape icon-xl shadow text-center border-radius-xl">
-<!-- Tambahkan elemen untuk menampilkan QR code -->
+                        <!-- <img id="qrCode" style="border-radius: 10px;" class="w-100 position-relative"> -->
+                        <!-- Tambahkan elemen untuk menampilkan QR code -->
 <img id="qrCode" src="https://api.qrserver.com/v1/create-qr-code/?data=<?=$peg['nis']?>&size=150x150" alt="QR Code">
+
                       </div>
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
