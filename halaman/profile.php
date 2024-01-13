@@ -47,42 +47,96 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
 
 <?php
 include '../koneksi.php';
-if(isset($_POST['submit']))
-   {
-   
-   $imgfile=$_FILES["fotomurid"]["name"];
-   // get the image extension
-   $extension = substr($imgfile,strlen($imgfile)-4,strlen($imgfile));
-   // allowed extensions
-   $allowed_extensions = array(".jpg",".jpeg",".png",".gif");
-   // Validation for allowed extensions .in_array() function searches an array for a specific value.
-   if(!in_array($extension,$allowed_extensions))
-   {
-   echo "<script>alert('Invalid format. Only jpg / jpeg/ png /gif format allowed');</script>";
-   }
-   else
-   {
-   //rename the image file
-   $imgnewfile=md5($imgfile).$extension;
-   // Code for move image into directory
-   move_uploaded_file($_FILES["fotomurid"]["tmp_name"],"../fotomurid/".$imgnewfile);
-   
-   $query=mysqli_query($koneksi,"update datamurid set fotomurid='$imgnewfile' where nis='$_SESSION[nis]'");
-   if($query)
-   {
-    echo '<meta http-equiv="refresh" content="0;url=profile.php">';
-   }
-   else{
-   $error="Something went wrong . Please try again.";
-   echo '
-        <script>
-            alert("Maaf Foto anda terlalu berat");
-            window.location.href=profile.php
-        </script>';  
-   } 
-   }
-   }
+
+if (isset($_POST['submit'])) {
+    $imgfile = $_FILES["fotomurid"]["name"];
+    $extension = strtolower(pathinfo($imgfile, PATHINFO_EXTENSION));
+    $allowed_extensions = array("jpg", "jpeg", "png", "gif");
+
+    if (!in_array($extension, $allowed_extensions)) {
+        echo "<script>alert('Invalid format. Only jpg / jpeg / png / gif format allowed');</script>";
+    } else {
+        $imgnewfile = md5($imgfile) . ".$extension";
+        $uploadPath = "../fotomurid/" . $imgnewfile;
+
+        // Check if there is an existing profile picture
+        $querySelect = mysqli_query($koneksi, "SELECT fotomurid FROM datamurid WHERE nis='$_SESSION[nis]'");
+        $row = mysqli_fetch_assoc($querySelect);
+        $oldImage = $row['fotomurid'];
+
+        // If there is an existing profile picture, delete it
+        if ($oldImage && file_exists("../fotomurid/$oldImage")) {
+            unlink("../fotomurid/$oldImage");
+        }
+
+        move_uploaded_file($_FILES["fotomurid"]["tmp_name"], $uploadPath);
+
+        // Path to the uploaded image
+        $imagePath = $uploadPath;
+
+        // Get the original dimensions
+        list($width, $height) = getimagesize($imagePath);
+
+        // Set the target dimensions (1:1 ratio)
+        $targetSize = min($width, $height);
+
+        // Create a new image resource with the target size
+        $targetImage = imagecreatetruecolor($targetSize, $targetSize);
+
+        // Load the uploaded image
+        $sourceImage = null;
+        switch ($extension) {
+            case "jpg":
+            case "jpeg":
+                $sourceImage = imagecreatefromjpeg($imagePath);
+                break;
+            case "png":
+                $sourceImage = imagecreatefrompng($imagePath);
+                break;
+            case "gif":
+                $sourceImage = imagecreatefromgif($imagePath);
+                break;
+        }
+
+        // Crop the image to the target dimensions (centered)
+        $cropX = ($width - $targetSize) / 2;
+        $cropY = ($height - $targetSize) / 2;
+        imagecopyresampled($targetImage, $sourceImage, 0, 0, $cropX, $cropY, $targetSize, $targetSize, $targetSize, $targetSize);
+
+        // Save the cropped image
+        switch ($extension) {
+            case "jpg":
+            case "jpeg":
+                imagejpeg($targetImage, $imagePath);
+                break;
+            case "png":
+                imagepng($targetImage, $imagePath);
+                break;
+            case "gif":
+                imagegif($targetImage, $imagePath);
+                break;
+        }
+
+        // Free up memory
+        imagedestroy($sourceImage);
+        imagedestroy($targetImage);
+
+        $query = mysqli_query($koneksi, "UPDATE datamurid SET fotomurid='$imgnewfile' WHERE nis='$_SESSION[nis]'");
+        if ($query) {
+            echo '<meta http-equiv="refresh" content="0;url=profile.php">';
+        } else {
+            $error = "Something went wrong. Please try again.";
+            echo '
+                <script>
+                    alert("Maaf, terjadi kesalahan. Silakan coba lagi.");
+                    window.location.href=profile.php
+                </script>';
+        }
+    }
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
