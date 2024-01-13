@@ -131,6 +131,8 @@ if (!isset($_SESSION['nis'])) {
 
       </div>
 
+      <br>
+
       <?php
       // Deteksi user agent untuk menentukan apakah pengguna mengakses dari perangkat mobile
       $userAgent = $_SERVER['HTTP_USER_AGENT'];
