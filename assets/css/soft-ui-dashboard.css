@@ -20926,6 +20926,11 @@ fieldset:disabled .btn {
   background: transparent;
 }
 
+.card-baru {
+  box-shadow: 0 20px 27px 0 rgba(55, 81, 126, 0.7);
+  border-radius: 20px;
+}
+
 .card {
   box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.05);
 }

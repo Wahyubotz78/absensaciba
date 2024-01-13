@@ -32,10 +32,9 @@ if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) &
             if ($result_check_absensi->num_rows > 0) {
                 echo '<center>
                 <br>
-                <br>
-                <br>
+                <h6>Anda Sudah Absen Hari Ini</h6>
                 <div class="col-12 col-lg-6">
-                    <div class="card h-100">
+                    <div class="card-baru h-100">
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
@@ -80,11 +79,11 @@ if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) &
 
             if ($koneksi->query($sql_insert) === TRUE) {
                 echo '<center>
+                <h6>
                 <br>
-                <br>
-                <br>
+                <h6>Berhasil Absen</h6>
                 <div class="col-12 col-lg-6">
-                    <div class="card h-100">
+                    <div class="card-baru h-100">
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-md-8 d-flex align-items-center">
