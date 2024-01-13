@@ -79,7 +79,6 @@ if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) &
 
             if ($koneksi->query($sql_insert) === TRUE) {
                 echo '<center>
-                <h6>
                 <br>
                 <h3>Berhasil Absen <span class="text-success font-weight-bolder"><i class="fas fa-check opacity-10"></i></span></h3>
                 <div class="col-12 col-lg-6">

@@ -45,6 +45,16 @@ if (!isset($_SESSION['nis'])) {
       font-weight: bold;
       font-size: 90px; /* Contoh ukuran font yang diperbesar */
     }
+
+    .center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .center-text {
+      text-align: center;
+    }
   </style>
 
 
@@ -84,21 +94,41 @@ if (!isset($_SESSION['nis'])) {
             <video id="video" autoplay></video>
             <img id="replacementImage" src="../assets/wapi-clock.gif" style="display: none;" />
             <!-- Elemen untuk menampilkan countdown -->
-<center><div id="countdown"></div></center>
+          <center><div id="countdown"></div></center>
           </div>
           <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
           <script src="script.js"></script>
         </div>
       </div>
 
-      <div class="col-lg-6  ">
+      <div class="col-lg-6">
         <br class="br-mobile">
         <div class="card h-100 p-3 video-result-container">
-        <div id="resultContainer"></div>
-          <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
-          <script src="script.js"></script>
+          <div id="resultContainer">
+          <div class="center-container">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          <h3 class="center-text">Tolong arahkan QR ke kamera <span class="text font-weight-bolder"><i class="fas fa-exclamation opacity-10"></i></span></h3>
+        </div>
+
+          </div>
         </div>
       </div>
+
       </div>
 
       <?php
