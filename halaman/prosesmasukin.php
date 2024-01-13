@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include '../koneksi.php';
 
 if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) && isset($_GET['jurusan']) && isset($_GET['fotomurid'])) {
@@ -125,7 +126,26 @@ if(isset($_GET['nis']) && isset($_GET['namalengkap']) && isset($_GET['kelas']) &
         }
     }
     } else {
-        echo "<div class='error'>NIS tidak di temukan</div>";
+        echo '<div class="center-container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      <h3 class="center-text">NIS tidak ditemukan <span class="text-danger font-weight-bolder"><i class="fas fa-exclamation opacity-10"></i></span></h3>
+    </div>';
     }
 } else {
     echo "<div class='error'>Data yang diperlukan tidak lengkap.</div>";

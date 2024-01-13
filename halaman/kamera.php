@@ -2,9 +2,9 @@
       session_start();
       // Tempatkan baris-baris lainnya yang ingin dijalankan di sini
       // Aktifkan semua jenis kesalahan
-error_reporting(E_ALL);
-// Tampilkan pesan kesalahan ke layar
-ini_set('display_errors', 1);
+      error_reporting(E_ALL);
+      // Tampilkan pesan kesalahan ke layar
+      ini_set('display_errors', 1);
 
 // Periksa apakah sesi pengguna ada atau tidak
 if (!isset($_SESSION['nis'])) {
@@ -106,6 +106,7 @@ if (!isset($_SESSION['nis'])) {
         <div class="card h-100 p-3 video-result-container">
           <div id="resultContainer">
           <div class="center-container">
+            <br>
             <br>
             <br>
             <br>
