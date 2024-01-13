@@ -82,6 +82,9 @@ if (!isset($_SESSION['nis'])) {
         <div class="card h-100 p-3 video-result-container">
           <div class="video-wrapper">
             <video id="video" autoplay></video>
+            <img id="replacementImage" src="../assets/wapi-clock.gif" style="display: none;" />
+            <!-- Elemen untuk menampilkan countdown -->
+<center><div id="countdown"></div></center>
           </div>
           <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
           <script src="script.js"></script>
@@ -127,6 +130,7 @@ if (!isset($_SESSION['nis'])) {
 <script>
 const video = document.getElementById('video');
 const resultDiv = document.getElementById('result');
+let isCameraVisible = false;
 
 // Request access to the camera
 navigator.mediaDevices.getUserMedia({ video: true })
@@ -161,6 +165,11 @@ function scanQRCode() {
       console.log('QR Code detected:', code.data);
       sendDataToPHP(code.data);
       insertDataToAbsen(code.data);
+      // Tambahkan jeda 2 detik setelah pemindaian selesai
+      setTimeout(function () {
+        requestAnimationFrame(scanQRCode);
+      }, 2000); //dalam milidititik
+      return;
     }
   } catch (error) {
     console.error('Error decoding QR code:', error);
@@ -197,13 +206,66 @@ function insertDataToAbsen(nis) {
     });
 }
 
+// Variabel untuk menyimpan waktu countdown (dalam detik)
+let countdownTime = 0;
+// Variabel untuk menandai apakah countdown sedang berjalan atau tidak
+let isCountdownRunning = false;
 
+// Fungsi untuk menampilkan countdown
+function updateCountdown() {
+  const countdownElement = document.getElementById('countdown');
+  if (isCountdownRunning) {
+    const hours = Math.floor(countdownTime / 3600);
+    const minutes = Math.floor((countdownTime % 3600) / 60);
+    const seconds = countdownTime % 60;
+
+    countdownElement.innerHTML = `<b>Absen masuk akan terbuka dalam ${hours} Jam ${minutes} Menit ${seconds} Detik</b>`;
+
+    if (countdownTime > 0) {
+      countdownTime--;
+      setTimeout(updateCountdown, 1000);
+    } else {
+      // Countdown selesai, kamera muncul kembali
+      isCountdownRunning = false;
+      showCamera();
+// Hentikan countdown
+countdownElement.innerHTML = ""; 
+      // Menjalankan countdown selama 5 detik sebelum menyembunyikan kamera lagi
+      setTimeout(function () {
+        hideCameraShowImage();
+        startCountdown(10); // Mulai countdown lagi setelah menampilkan gambar
+      }, 5000);
+    }
+  }
+}
+
+// Fungsi untuk memulai countdown dengan waktu tertentu
+function startCountdown(timeInSeconds) {
+  countdownTime = timeInSeconds;
+  isCountdownRunning = true; // Setel isCountdownRunning ke true saat countdown dimulai
+  updateCountdown();
+}
+
+function hideCameraShowImage() {
+  video.style.display = 'none';
+  document.getElementById('replacementImage').style.display = 'block';
+}
+
+function showCamera() {
+  video.style.display = 'block';
+  document.getElementById('replacementImage').style.display = 'none';
+}
 
 // Event listener for when the video is ready
 video.addEventListener('loadeddata', function () {
   requestAnimationFrame(scanQRCode);
-});
 
+  // Mulai countdown dan perubahan antara kamera dan gambar
+  setTimeout(function () {
+    hideCameraShowImage();
+    startCountdown(10);
+  }, 50000000);
+});
 </script>
 </body>
 
