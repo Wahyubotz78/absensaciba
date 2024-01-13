@@ -123,13 +123,13 @@ if (isset($_POST['submit'])) {
 
         $query = mysqli_query($koneksi, "UPDATE datamurid SET fotomurid='$imgnewfile' WHERE nis='$_SESSION[nis]'");
         if ($query) {
-            echo '<meta http-equiv="refresh" content="0;url=profile.php">';
+            echo '<meta http-equiv="refresh" content="0;url=profile">';
         } else {
             $error = "Something went wrong. Please try again.";
             echo '
                 <script>
                     alert("Maaf, terjadi kesalahan. Silakan coba lagi.");
-                    window.location.href=profile.php
+                    window.location.href=profile
                 </script>';
         }
     }
