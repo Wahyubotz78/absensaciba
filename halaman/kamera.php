@@ -94,7 +94,9 @@ if (!isset($_SESSION['nis'])) {
             <video id="video" autoplay></video>
             <img id="replacementImage" src="../assets/wapi-clock.gif" style="display: none;" />
             <!-- Elemen untuk menampilkan countdown -->
-          <center><div id="countdown"></div></center>
+            <br>
+          <center><div id="imageCountdown"></div></center>
+          <center><div id="cameraCountdown"></div></center>
           </div>
           <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
           <script src="script.js"></script>
@@ -239,65 +241,81 @@ function insertDataToAbsen(nis) {
     });
 }
 
-// Variabel untuk menyimpan waktu countdown (dalam detik)
-let countdownTime = 0;
-// Variabel untuk menandai apakah countdown sedang berjalan atau tidak
-let isCountdownRunning = false;
+let imageCountdownTime = 0;
+let cameraCountdownTime = 0;
+let isImageCountdownRunning = false;
+let isCameraCountdownRunning = false;
 
-// Fungsi untuk menampilkan countdown
-function updateCountdown() {
-  const countdownElement = document.getElementById('countdown');
-  if (isCountdownRunning) {
-    const hours = Math.floor(countdownTime / 3600);
-    const minutes = Math.floor((countdownTime % 3600) / 60);
-    const seconds = countdownTime % 60;
+function updateImageCountdown() {
+  const imageCountdownElement = document.getElementById('imageCountdown');
+  if (isImageCountdownRunning) {
+    const hours = Math.floor(imageCountdownTime / 3600);
+    const minutes = Math.floor((imageCountdownTime % 3600) / 60);
+    const seconds = imageCountdownTime % 60;
 
-    countdownElement.innerHTML = `<b>Absen masuk akan terbuka dalam ${hours} Jam ${minutes} Menit ${seconds} Detik</b>`;
+    imageCountdownElement.innerHTML = `<b>Gambar akan terbuka dalam ${hours} Jam ${minutes} Menit ${seconds} Detik</b>`;
 
-    if (countdownTime > 0) {
-      countdownTime--;
-      setTimeout(updateCountdown, 1000);
+    if (imageCountdownTime > 0) {
+      imageCountdownTime--;
+      setTimeout(updateImageCountdown, 1000);
     } else {
-      // Countdown selesai, kamera muncul kembali
-      isCountdownRunning = false;
-      showCamera();
-// Hentikan countdown
-countdownElement.innerHTML = ""; 
-      // Menjalankan countdown selama 5 detik sebelum menyembunyikan kamera lagi
-      setTimeout(function () {
-        hideCameraShowImage();
-        startCountdown(10); // Mulai countdown lagi setelah menampilkan gambar
-      }, 5000);
+      isImageCountdownRunning = false;
+      hideImage();
+      imageCountdownElement.innerHTML = "";
     }
   }
 }
 
-// Fungsi untuk memulai countdown dengan waktu tertentu
-function startCountdown(timeInSeconds) {
-  countdownTime = timeInSeconds;
-  isCountdownRunning = true; // Setel isCountdownRunning ke true saat countdown dimulai
-  updateCountdown();
+function startImageCountdown(timeInSeconds) {
+  imageCountdownTime = timeInSeconds;
+  isImageCountdownRunning = true;
+  updateImageCountdown();
 }
 
-function hideCameraShowImage() {
+function hideImage() {
   video.style.display = 'none';
   document.getElementById('replacementImage').style.display = 'block';
+  startCameraCountdown(10); // Mulai countdown untuk kamera setelah gambar muncul
 }
 
 function showCamera() {
   video.style.display = 'block';
   document.getElementById('replacementImage').style.display = 'none';
+  startImageCountdown(1000); // Mulai countdown untuk gambar saat kamera terbuka pertama kali
+}
+
+function updateCameraCountdown() {
+  const cameraCountdownElement = document.getElementById('cameraCountdown');
+  if (isCameraCountdownRunning) {
+    const hours = Math.floor(cameraCountdownTime / 3600);
+    const minutes = Math.floor((cameraCountdownTime % 3600) / 60);
+    const seconds = cameraCountdownTime % 60;
+
+    cameraCountdownElement.innerHTML = `<b>Kamera akan muncul dalam ${hours} Jam ${minutes} Menit ${seconds} Detik</b>`;
+
+    if (cameraCountdownTime > 0) {
+      cameraCountdownTime--;
+      setTimeout(updateCameraCountdown, 1000);
+    } else {
+      isCameraCountdownRunning = false;
+      showCamera();
+      cameraCountdownElement.innerHTML = "";
+    }
+  }
+}
+
+function startCameraCountdown(timeInSeconds) {
+  cameraCountdownTime = timeInSeconds;
+  isCameraCountdownRunning = true;
+  updateCameraCountdown();
 }
 
 // Event listener for when the video is ready
 video.addEventListener('loadeddata', function () {
   requestAnimationFrame(scanQRCode);
 
-  // Mulai countdown dan perubahan antara kamera dan gambar
-  setTimeout(function () {
-    hideCameraShowImage();
-    startCountdown(10);
-  }, 50000000);
+  // Langsung buka kamera
+  showCamera();
 });
 </script>
 </body>
