@@ -281,7 +281,7 @@ function hideImage() {
 function showCamera() {
   video.style.display = 'block';
   document.getElementById('replacementImage').style.display = 'none';
-  startImageCountdown(1000); // Mulai countdown untuk gambar saat kamera terbuka pertama kali
+  startImageCountdown(1000000); // Mulai countdown untuk gambar saat kamera terbuka pertama kali
 }
 
 function updateCameraCountdown() {
