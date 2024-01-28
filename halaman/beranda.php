@@ -71,6 +71,12 @@ if (!isset($_SESSION['nis'])) {
 
 <?php include('navbar.php');?>
     <div class="container-fluid py-4">
+    <?php
+        							$tampilPeg    =mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
+        							$peg    =mysqli_fetch_array($tampilPeg);
+                      $role = $peg['jurusan'];
+                      if ($role !== 'Guru' && $role !== 'Admin') {
+    							?>
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
@@ -201,6 +207,7 @@ if (!isset($_SESSION['nis'])) {
           </div>
         </div>
       </div>
+        <?php } ?>
       <div class="row mt-4">
         <div class="col-lg-7 mb-lg-0 mb-4">
           <div class="card">
