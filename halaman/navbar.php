@@ -181,10 +181,25 @@
 
     </nav>
     <?php
-        // Cek apakah halaman yang sedang aktif bukanlah profile.php
-        $currentPage = basename($_SERVER['PHP_SELF']);
-        if ($currentPage !== 'profile.php') {
-            echo '<br>';
+    // Cek apakah halaman yang sedang aktif bukanlah profile.php
+    $currentPage = basename($_SERVER['PHP_SELF']);
+    if ($currentPage !== 'profile.php') {
+        echo '<br class="br-murid">';
+    }
+
+    // Cek apakah peran (jurusan) bukan 'Guru' atau 'Admin' di halaman beranda.php
+    if ($currentPage === 'beranda.php') {
+        $tampilPeg = mysqli_query($koneksi, "SELECT * FROM datamurid WHERE nis='$_SESSION[nis]'");
+        $peg = mysqli_fetch_array($tampilPeg);
+        $role = $peg['jurusan'];
+        if ($role !== 'Guru' && $role !== 'Admin') {
+            // Tidak perlu melakukan apa pun jika jurusan bukan 'Guru' atau 'Admin'
+        } else {
+            // Jika jurusan adalah 'Guru' atau 'Admin', maka tidak menampilkan <br>
+            echo '<style> .br-murid {display: none;} </style>';
         }
-    ?>
+    }
+?>
+
+
     <!-- End Navbar -->
