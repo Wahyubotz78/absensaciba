@@ -1,16 +1,46 @@
 <?php
+include '../koneksi.php';
+
+// buat proses tambah
    if(isset($_POST['submit'])){
    $keterangan=$_POST['keterangan'];
    $mulai=$_POST['mulai'];
-   $selesai=md5($_POST['selesai']);
+   $selesai=$_POST['selesai'];
    $query=mysqli_query($koneksi,"insert into jamabsen(keterangan,mulai,selesai) values('$keterangan','$mulai','$selesai')");
    if($query){
-   echo "<script>alert('Sub-admin details added successfully.');</script>";
-   echo "<script type='text/javascript'> document.location = 'admindata'; </script>";
+   echo "<script>alert('Data jam absen telah berhasil di tambahkan.');</script>";
+   echo "<script type='text/javascript'> document.location = 'datajamabsen'; </script>";
    } else {
    echo "<script>alert('Something went wrong. Please try again.');</script>";
    }
    }
+
+// buat proses hapus
+// Code for Forever deletionparmdel
+if(isset($_GET['action']) && isset($_GET['id'])) {
+  if($_GET['action'] == 'del') {
+      $id = intval($_GET['id']);
+      $query = mysqli_query($koneksi, "delete from jamabsen where id='$id'");
+      echo "<script>alert('Data jam absen telah berhasil dihapus.');</script>";
+      echo "<script type='text/javascript'> document.location = 'datajamabsen'; </script>";
+  }
+}
+
+//buat proses edit datajamabsen nya
+if(isset($_POST['edit'])){
+  $keterangan=$_POST['keterangan'];
+  $mulai=$_POST['mulai'];
+  $selesai=$_POST['selesai'];
+  $query=mysqli_query($koneksi,"update into jamabsen(keterangan,mulai,selesai) values('$keterangan','$mulai','$selesai')");
+  if($query){
+  echo "<script>alert('Data jam absen telah berhasil di tambahkan.');</script>";
+  echo "<script type='text/javascript'> document.location = 'datajamabsen'; </script>";
+  } else {
+  echo "<script>alert('Something went wrong. Please try again.');</script>";
+  }
+  }
+
+// ampasnya
   session_start();
   // Tempatkan baris-baris lainnya yang ingin dijalankan di sini
   // Aktifkan semua jenis kesalahan
@@ -88,12 +118,12 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
         <br class="br-mobile">
         <br class="br-mobile">
         <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
   Tambah
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -116,23 +146,31 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
             <label for="message-text" class="col-form-label">Selesai</label>
             <input name="selesai" type="text" placeholder="Contoh: 15:00:00" class="form-control" id="recipient-name">
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
+          <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button name="submit" type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
-          <div class="card mb-4">
+<!-- CARD BOOTSTRAP -->
+          <!-- <div class="card mb-4">
             <div class="card-header pb-0 p-3">
               <h6 class="mb-1">Data Jam Absen Saciba</h6>
               <p class="text-sm">Berisi data jam absen SMKN 1 Cikarang Barat</p>
             </div>
-            <div class="card-body p-3">
+            <div class="card-body p-3"> -->
               <div class="row">
                 <!-- Mulai reservasi -->
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Admin</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
                                         <table class="table table-bordered" id="mauexport" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
@@ -164,8 +202,8 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
                                        <td><?php echo htmlentities($row['keterangan']);?></td>
                                        <td><?php echo htmlentities($row['mulai']);?></td>
                                        <td><?php echo htmlentities($row['selesai']);?></td>
-                                       <td><a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> 
-                                          &nbsp;<a href="#" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i></a> 
+                                       <td><a href="#" data-toggle="modal" data-target="#edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> 
+                                          &nbsp;<a href="datajamabsen?id=<?php echo htmlentities($row['id']);?>&&action=del" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i></a> 
                                        </td>
                                     </tr>
                                     <?php
@@ -173,9 +211,48 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
                                         } ?>
                                             </tbody>
                                         </table>
-              </div>
-            </div>
+                                        </div>
+                                </div>
+                            </div>
+                                        <!-- Modal -->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Waktu Absen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form name="tambahjamabsen" method="post">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Keterangan</label>
+            <input name="keterangan" type="text" placeholder="Contoh: Masuk" class="form-control" id="recipient-name">
           </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Mulai</label>
+            <input name="mulai" type="text" placeholder="Contoh: 07:00:00" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Selesai</label>
+            <input name="selesai" type="text" placeholder="Contoh: 15:00:00" class="form-control" id="recipient-name">
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button name="edit" type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+              </div>
+              <!-- DIV TUTUP CARD BOOTSTRAP -->
+            <!-- </div>
+          </div> -->
         </div>
       </div>
       <?php
