@@ -17,23 +17,22 @@ include '../koneksi.php';
 
 // buat proses hapus
 // Code for Forever deletionparmdel
-if(isset($_GET['action']) && isset($_GET['id'])) {
-  if($_GET['action'] == 'del') {
-      $id = intval($_GET['id']);
+if(isset($_POST['hapus'])) {
+      $id = $_POST['id'];
       $query = mysqli_query($koneksi, "delete from jamabsen where id='$id'");
       echo "<script>alert('Data jam absen telah berhasil dihapus.');</script>";
       echo "<script type='text/javascript'> document.location = 'datajamabsen'; </script>";
-  }
 }
 
 //buat proses edit datajamabsen nya
-if(isset($_POST['edit'])){
+if(isset($_POST['editdata'])){
+  $id = $_POST['id'];
   $keterangan=$_POST['keterangan'];
   $mulai=$_POST['mulai'];
   $selesai=$_POST['selesai'];
-  $query=mysqli_query($koneksi,"update into jamabsen(keterangan,mulai,selesai) values('$keterangan','$mulai','$selesai')");
+  $query = mysqli_query($koneksi, "UPDATE jamabsen SET keterangan='$keterangan', mulai='$mulai', selesai='$selesai' WHERE id='$id'");
   if($query){
-  echo "<script>alert('Data jam absen telah berhasil di tambahkan.');</script>";
+  echo "<script>alert('Data jam absen telah berhasil di update.');</script>";
   echo "<script type='text/javascript'> document.location = 'datajamabsen'; </script>";
   } else {
   echo "<script>alert('Something went wrong. Please try again.');</script>";
@@ -118,9 +117,7 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
         <br class="br-mobile">
         <br class="br-mobile">
         <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
-  Tambah
-</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -128,27 +125,25 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">Tambah Waktu Absen</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+       
       </div>
       <div class="modal-body">
       <form name="tambahjamabsen" method="post">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Keterangan</label>
-            <input name="keterangan" type="text" placeholder="Contoh: Masuk" class="form-control" id="recipient-name">
+            <input name="keterangan" type="text" placeholder="Contoh: Masuk" class="form-control" id="recipient-name" autocomplete="off">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Mulai</label>
-            <input name="mulai" type="text" placeholder="Contoh: 07:00:00" class="form-control" id="recipient-name">
+            <input name="mulai" type="text" placeholder="Contoh: 07:00:00" class="form-control" id="recipient-name" autocomplete="off">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Selesai</label>
-            <input name="selesai" type="text" placeholder="Contoh: 15:00:00" class="form-control" id="recipient-name">
+            <input name="selesai" type="text" placeholder="Contoh: 15:00:00" class="form-control" id="recipient-name" autocomplete="off">
           </div>
           <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button name="submit" type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <button name="submit" type="submit" class="btn btn-primary">Tambah</button>
       </div>
         </form>
       </div>
@@ -166,30 +161,24 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
                 <!-- Mulai reservasi -->
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Admin</h6>
+                                <div class="card-header pb-0 p-4">
+                                <h5 class="m-0 font-weight-bold text-primary"><b>JAM ABSEN <i class="fas fa-fw fa-clock"></i></b></h5>
+                                <br> 
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#tambah"><b>Tambah +</b></button>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="mauexport" width="100%" cellspacing="0">
+                                        <table class="table table-striped table-bordered text-center" id="mauexport" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                       <th> Keterangan</th>
-                                       <th>Mulai</th>
-                                       <th>Selesai</th>
-                                       <th>Aksi</th>
+                                                    <th class="text-center">#</th>
+                                       <th class="text-center"> Keterangan</th>
+                                       <th class="text-center">Mulai</th>
+                                       <th class="text-center">Selesai</th>
+                                       <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>#</th>
-                                       <th> Keterangan</th>
-                                       <th>Mulai</th>
-                                       <th>Selesai</th>
-                                       <th>Aksi</th>
-                                                </tr>
-                                            </tfoot>
+                                           
                                             <tbody>
                                             <?php 
                                        $query=mysqli_query($koneksi,"Select * from  jamabsen");
@@ -199,13 +188,87 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
                                        ?>
                                     <tr>
                                        <th scope="row"><?php echo htmlentities($cnt);?></th>
-                                       <td><?php echo htmlentities($row['keterangan']);?></td>
+                                       <td class><?php echo htmlentities($row['keterangan']);?></td>
                                        <td><?php echo htmlentities($row['mulai']);?></td>
                                        <td><?php echo htmlentities($row['selesai']);?></td>
-                                       <td><a href="#" data-toggle="modal" data-target="#edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> 
-                                          &nbsp;<a href="datajamabsen?id=<?php echo htmlentities($row['id']);?>&&action=del" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i></a> 
+                                       <td><a href="#" data-toggle="modal" data-target="#edit_<?php echo htmlentities($row['id']); ?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> 
+                                          &nbsp;<a href="#" data-toggle="modal" data-target="#hapuse_<?php echo htmlentities($row['id']); ?>" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i></a> 
                                        </td>
                                     </tr>
+
+ <!-- Modal -->
+ <div class="modal fade" id="edit_<?php echo htmlentities($row['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Waktu Absen</h5>
+       
+      </div>
+      <div class="modal-body">
+      <form name="tambahjamabsen" method="post">
+     
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Keterangan</label>
+            <input name="keterangan" type="text" placeholder="Contoh: Masuk" value="<?php echo htmlentities($row['keterangan']); ?>" class="form-control" id="recipient-name" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Mulai</label>
+            <input name="mulai" type="text" placeholder="Contoh: 07:00:00" value="<?php echo htmlentities($row['mulai']); ?>" class="form-control" id="recipient-name" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Selesai</label>
+            <input name="selesai" type="text" placeholder="Contoh: 15:00:00" value="<?php echo htmlentities($row['selesai']); ?>" class="form-control" id="recipient-name" autocomplete="off">
+          </div>
+          <div class="modal-footer">
+          <input type="hidden" name="id" value="<?php echo htmlentities($row['id']); ?>">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <button name="editdata" type="submit" class="btn btn-primary">Edit</button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- Modal Hapuzzzz-->
+ <div class="modal fade" id="hapuse_<?php echo htmlentities($row['id']); ?>" tabindex="-1"
+                        role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalScrollableTitle">Hapus Data Ini🧐</h5>
+
+                            </div>
+                            <!-- Modal body -->
+                            <form method="post">
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <div class="profile-detaile">
+                                      <h5 class="m-0 font-weight-bold text-dark">Keterangan :</h5>
+                                      <h6><b><?php echo htmlentities($row['keterangan']); ?></b></h6>
+                                      <h5 class="m-0 font-weight-bold text-dark">Mulai:</h5>
+                                      <h6><b><?php echo htmlentities($row['mulai']); ?></b></h6>
+                                      <h5 class="m-0 font-weight-bold text-dark">Selesai:</h5>
+                                      <h6><b><?php echo htmlentities($row['selesai']); ?></b></h6>
+                                    </div>
+                                    <input type="hidden" name="id" value="<?php echo htmlentities($row['id']); ?>">
+                                  </div>
+                                </div>
+                                <!-- Modal footer -->
+                                <br>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+                                  <button type="submit" class="btn btn-success btn-user btn-block"
+                                    name="hapus">Ya!!!</button>
+                                </div>
+                              </div>
+                            </form>
+
+                          </div>
+                        </div>
+                      </div>
+
                                     <?php
                                        $cnt++;
                                         } ?>
@@ -214,39 +277,7 @@ exit(); // Pastikan untuk menghentikan eksekusi skrip setelah pengalihan header
                                         </div>
                                 </div>
                             </div>
-                                        <!-- Modal -->
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Waktu Absen</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form name="tambahjamabsen" method="post">
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Keterangan</label>
-            <input name="keterangan" type="text" placeholder="Contoh: Masuk" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Mulai</label>
-            <input name="mulai" type="text" placeholder="Contoh: 07:00:00" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Selesai</label>
-            <input name="selesai" type="text" placeholder="Contoh: 15:00:00" class="form-control" id="recipient-name">
-          </div>
-          <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button name="edit" type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+                                       
 
 
               </div>
